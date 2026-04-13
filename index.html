@@ -2,116 +2,202 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Lumina Admin | إدارة العمليات المالية والامتثال</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMINA | القيادة المالية الذكية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        body { background: #010409; color: #e6edf3; font-family: 'Cairo', sans-serif; }
-        .admin-card { background: #0d1117; border: 1px solid #30363d; border-radius: 20px; transition: 0.3s; }
-        .admin-card:hover { border-color: #00f2fe; }
-        .status-badge { padding: 2px 10px; border-radius: 50px; font-size: 10px; font-weight: bold; }
-        .danger-zone { border: 1px solid #da3633; background: #211110; }
-        .btn-approve { background: #059669; transition: 0.3s; }
-        .btn-approve:hover { background: #10b981; transform: scale(1.05); }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Orbitron:wght@700&display=swap');
+        
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --bg-dark: #050a15;
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: #e2e8f0; 
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at top right, rgba(79, 172, 254, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(0, 242, 254, 0.1), transparent);
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+        }
+
+        .lumina-logo { font-family: 'Orbitron', sans-serif; letter-spacing: 4px; }
+
+        .btn-premium {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+            transition: 0.4s;
+        }
+
+        .btn-premium:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.5); }
+
+        .hidden { display: none !important; }
+
+        /* Switch Styling */
+        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(22px); }
     </style>
 </head>
-<body class="p-8">
+<body class="hero-bg">
 
-    <div class="max-w-7xl mx-auto">
-        <header class="flex justify-between items-center mb-10">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20">L</div>
-                <h1 class="text-2xl font-black italic">LUMINA <span class="text-cyan-400">ADMIN</span></h1>
-            </div>
-            <div class="flex gap-6">
-                <div class="admin-card px-6 py-3">
-                    <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">المحفظة المركزية</p>
-                    <p class="text-2xl font-black text-emerald-400">1,250,000 <span class="text-xs text-white">SAR</span></p>
-                </div>
-                <div class="admin-card px-6 py-3">
-                    <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">طلبات سحب معلقة</p>
-                    <p class="text-2xl font-black text-yellow-500">3</p>
-                </div>
-            </div>
-        </header>
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center px-6 md:px-10 glass-morphism rounded-none border-t-0 border-x-0">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 btn-premium rounded-xl flex items-center justify-center font-black">L</div>
+            <span class="text-xl font-black lumina-logo tracking-widest">LUMINA</span>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="showAuth()" class="bg-white/5 border border-white/10 px-4 py-2 rounded-full text-[10px] font-bold hover:bg-white/10 transition">دخول المشتركين</button>
+        </div>
+    </nav>
 
-        <section class="admin-card p-8 mb-10 border-yellow-500/20 shadow-xl shadow-yellow-500/5">
-            <div class="flex justify-between items-center mb-8">
-                <div>
-                    <h3 class="text-xl font-black flex items-center gap-2">
-                        <span class="w-2 h-2 bg-yellow-500 rounded-full animate-ping"></span>
-                        طلبات السحب من المحفظة
-                    </h3>
-                    <p class="text-xs text-slate-500 mt-1">تتطلب هذه الطلبات مراجعة الحساب قبل التحويل البنكي</p>
-                </div>
+    <main id="home" class="pt-40 px-6 pb-20">
+        <div class="max-w-6xl mx-auto text-center">
+            <span class="text-cyan-400 font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block">The Future of Finance Automation</span>
+            <h1 class="text-5xl md:text-8xl font-black leading-tight mb-8">أتمتة مالية<br><span class="text-transparent bg-clip-text btn-premium italic">بلا قيود</span></h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg font-light leading-relaxed mb-12 italic">
+                المنصة المالية الأكثر أماناً لإدارة فواتيرك وأتمتة عملياتك المحاسبية، موثقة ومعتمدة.
+            </p>
+            <div class="flex justify-center">
+                <button onclick="showAuth()" class="btn-premium px-10 py-5 rounded-2xl font-black text-xl text-white">ابدأ الآن</button>
             </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-right text-sm">
-                    <thead>
-                        <tr class="text-slate-500 border-b border-slate-800">
-                            <th class="pb-4">معلومات المشترك</th>
-                            <th class="pb-4">المبلغ المطلوب</th>
-                            <th class="pb-4">الأيبان البنكي (IBAN)</th>
-                            <th class="pb-4">حالة الامتثال</th>
-                            <th class="pb-4">الإجراء</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-800">
-                        <tr class="hover:bg-white/5 transition">
-                            <td class="py-6">
-                                <p class="font-bold">مؤسسة التقنية المتقدمة</p>
-                                <p class="text-[10px] text-slate-500 italic">ID: #88219</p>
-                            </td>
-                            <td class="py-6 font-black text-white">15,000.00 <span class="text-[10px] text-slate-500">SAR</span></td>
-                            <td class="py-6 font-mono text-[10px] text-cyan-400">SA8240000000112233445566</td>
-                            <td class="py-6"><span class="status-badge bg-emerald-500/10 text-emerald-500">✓ ممتثل</span></td>
-                            <td class="py-6">
-                                <div class="flex gap-2">
-                                    <button onclick="approveAction('15,000')" class="btn-approve px-4 py-2 rounded-lg text-xs font-bold text-white shadow-lg">موافقة وسحب</button>
-                                    <button class="bg-red-500/10 text-red-500 border border-red-500/20 px-4 py-2 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition">رفض</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-white/5 transition">
-                            <td class="py-6 font-bold">متجر التوريدات الشامل</td>
-                            <td class="py-6 font-black text-white">4,200.00 <span class="text-[10px] text-slate-500">SAR</span></td>
-                            <td class="py-6 font-mono text-[10px] text-cyan-400">SA1020000000998877665544</td>
-                            <td class="py-6"><span class="status-badge bg-red-500/10 text-red-500">⚠️ اشتباه تلاعب</span></td>
-                            <td class="py-6 text-slate-500 text-xs italic">محظور مؤقتاً</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        </div>
 
-        <section class="admin-card p-8">
-            <h3 class="text-xl font-black mb-8">قاعدة بيانات المشتركين</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-slate-900/40 p-6 rounded-2xl border border-white/5 flex justify-between items-center">
-                    <div>
-                        <p class="font-bold">شركة المسار السريع</p>
-                        <p class="text-[10px] text-slate-500">باقة: سنوية احترافية</p>
+        <div class="max-w-7xl mx-auto mt-32 grid md:grid-cols-3 gap-8">
+            <div class="glass-morphism p-8">
+                <div class="text-3xl mb-4">🛡️</div>
+                <h3 class="font-bold mb-2">أمان مؤسسي</h3>
+                <p class="text-slate-500 text-xs">نظام حماية يمنع التلاعب بالفواتير ويقوم بتجميد الحسابات المشبوهة آلياً.</p>
+            </div>
+            <div class="glass-morphism p-8 border-cyan-500/30">
+                <div class="text-3xl mb-4">🚀</div>
+                <h3 class="font-bold mb-2 text-cyan-400">الربط اللحظي</h3>
+                <p class="text-slate-500 text-xs">تكامل كامل لسحب البيانات ومعالجتها في أجزاء من الثانية مع الامتثال التام.</p>
+            </div>
+            <div class="glass-morphism p-8">
+                <div class="text-3xl mb-4">⚖️</div>
+                <h3 class="font-bold mb-2">الامتثال الضريبي</h3>
+                <p class="text-slate-500 text-xs">فواتير مطابقة لمواصفات ZATCA مع توقيع إلكتروني وباركود غير قابل للتزوير.</p>
+            </div>
+        </div>
+        <p class="text-center text-[10px] text-slate-600 mt-20">موثق من قبل هيئة الزكاة والضريبة والجمارك</p>
+    </main>
+
+    <main id="dashboard" class="hidden pt-32 px-6 pb-20 max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="glass-morphism p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-full mx-auto mb-4 border-2 border-white/10"></div>
+                    <h3 class="font-bold text-lg">مؤسسة عمر للتجارة</h3>
+                    <p class="text-[10px] text-slate-500 italic">سجل: 1010XXXXXX</p>
+                </div>
+                <div class="glass-morphism p-8 border-cyan-500/20">
+                    <p class="text-[10px] font-bold text-slate-400 mb-6 uppercase">المحفظة الذكية</p>
+                    <p class="text-4xl font-black mb-1">0.00 <span class="text-sm">SAR</span></p>
+                    <p class="text-[9px] text-emerald-500 mb-6 italic">متصل بالشبكة البنكية ✓</p>
+                    
+                    <input type="text" placeholder="SA00 0000 0000..." class="w-full bg-black/20 border border-white/5 p-3 rounded-xl text-[10px] font-mono mb-4 outline-none focus:border-cyan-500" value="SA8240000000112233445566">
+                    
+                    <div class="flex gap-2">
+                        <button onclick="openPayment()" class="flex-1 btn-premium py-3 rounded-xl font-bold text-[10px]">شحن</button>
+                        <button onclick="alert('تم إرسال طلب السحب للأدمن')" class="flex-1 bg-white/5 py-3 rounded-xl font-bold text-[10px]">سحب</button>
                     </div>
-                    <button class="text-cyan-400 text-xs font-bold underline">عرض الملف</button>
-                </div>
-                <div class="danger-zone p-6 rounded-2xl flex justify-between items-center">
-                    <div>
-                        <p class="font-bold text-red-400">يوزر مشبوه (محاولات اختراق)</p>
-                        <p class="text-[10px] text-red-300">IP: 192.168.1.1</p>
-                    </div>
-                    <button class="bg-red-600 text-white px-4 py-1 rounded text-[10px] font-bold">حظر نهائي</button>
                 </div>
             </div>
-        </section>
+
+            <div class="lg:col-span-2 space-y-6">
+                <div class="glass-morphism p-8">
+                    <h3 class="text-xl font-black mb-6">إدارة الاشتراك والخدمات</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-6 bg-white/5 rounded-2xl border border-white/5">
+                            <div>
+                                <h4 class="font-bold text-sm">التجديد التلقائي للخدمة</h4>
+                                <p class="text-[10px] text-slate-500 italic">سيتم الخصم من المحفظة عند انتهاء المدة</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="flex justify-between items-center p-6 bg-white/5 rounded-2xl border border-white/5">
+                            <div>
+                                <h4 class="font-bold text-sm">أدوات الفوترة الضريبية</h4>
+                                <p class="text-[10px] text-slate-500 italic text-cyan-400">الحالة: نشط ممتثل</p>
+                            </div>
+                            <button class="bg-white/10 px-4 py-2 rounded-lg text-[10px] font-bold">إصدار فاتورة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="paymentModal" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-6">
+        <div class="glass-morphism w-full max-w-md p-8">
+            <h2 class="text-2xl font-black mb-6 text-center">بوابة الدفع الآمنة</h2>
+            <div class="space-y-4">
+                <input type="number" placeholder="أدخل المبلغ (SAR)" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl text-center text-xl font-black outline-none focus:border-cyan-500">
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="p-3 border border-white/10 rounded-xl flex items-center justify-center opacity-50 hover:opacity-100 cursor-pointer transition"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Mada_Logo.svg" class="h-4"></div>
+                    <div class="p-3 border border-white/10 rounded-xl flex items-center justify-center opacity-50 hover:opacity-100 cursor-pointer transition"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" class="h-4 invert"></div>
+                    <div class="p-3 border border-white/10 rounded-xl flex items-center justify-center opacity-50 hover:opacity-100 cursor-pointer transition text-[8px] font-bold">VISA/MC</div>
+                </div>
+                <button onclick="simulateOTP()" class="w-full btn-premium py-4 rounded-xl font-black mt-4">تأكيد وعرض OTP</button>
+                <button onclick="closePayment()" class="w-full text-slate-600 text-[10px] mt-2">إلغاء العملية</button>
+            </div>
+
+            <div id="otpSection" class="hidden mt-8 pt-8 border-t border-white/10 text-center">
+                <p class="text-[10px] text-slate-400 mb-4 italic">أدخل رمز التحقق المرسل من البنك</p>
+                <div class="flex justify-center gap-2 mb-6" dir="ltr">
+                    <input type="text" maxlength="1" class="w-10 h-12 bg-white/5 border border-cyan-500/50 rounded-lg text-center font-bold">
+                    <input type="text" maxlength="1" class="w-10 h-12 bg-white/5 border border-cyan-500/50 rounded-lg text-center font-bold">
+                    <input type="text" maxlength="1" class="w-10 h-12 bg-white/5 border border-cyan-500/50 rounded-lg text-center font-bold">
+                    <input type="text" maxlength="1" class="w-10 h-12 bg-white/5 border border-cyan-500/50 rounded-lg text-center font-bold">
+                </div>
+                <button onclick="alert('تم شحن المحفظة بنجاح!')" class="w-full bg-emerald-600 py-3 rounded-xl font-bold text-xs">تحقق نهائي</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="authModal" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-6">
+        <div class="glass-morphism w-full max-w-sm p-10 text-center">
+            <h2 class="text-2xl font-black mb-2">دخول Lumina</h2>
+            <p class="text-[10px] text-slate-500 mb-8 italic italic">الرجاء إدخال بيانات السجل التجاري</p>
+            <input type="text" placeholder="1010XXXXXX" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl mb-4 text-center outline-none">
+            <button onclick="login()" class="w-full btn-premium py-4 rounded-xl font-black">دخول آمن</button>
+            <button onclick="document.getElementById('authModal').classList.add('hidden')" class="mt-4 text-slate-600 text-[10px]">إغلاق</button>
+        </div>
     </div>
 
     <script>
-        function approveAction(amount) {
-            if(confirm(`هل أنت متأكد من الموافقة على سحب مبلغ ${amount} SAR وتحويله للأيبان المذكور؟`)) {
-                alert("تم إرسال أمر السحب للبنك بنجاح. سيصل المبلغ للعميل خلال 24 ساعة.");
-            }
+        function showAuth() { document.getElementById('authModal').classList.remove('hidden'); }
+        function login() {
+            document.getElementById('authModal').classList.add('hidden');
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            window.scrollTo(0,0);
         }
+        function openPayment() { document.getElementById('paymentModal').classList.remove('hidden'); }
+        function closePayment() { 
+            document.getElementById('paymentModal').classList.add('hidden'); 
+            document.getElementById('otpSection').classList.add('hidden');
+        }
+        function simulateOTP() { document.getElementById('otpSection').classList.remove('hidden'); }
     </script>
 </body>
 </html>
