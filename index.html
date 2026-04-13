@@ -3,98 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة أتمتة العمليات المالية والربط المحاسبي</title>
+    <title>منصة أتمتة المؤسسات | الحل المتكامل</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        body { background-color: #020617; color: white; font-family: 'Cairo', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); }
-        .gradient-blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-        .card-hover:hover { transform: translateY(-5px); border-color: #3b82f6; transition: all 0.3s; }
+        body { background-color: #030712; color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        .gradient-text { background: linear-gradient(135deg, #fff 30%, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-card { transition: all 0.4s ease; }
+        .service-card:hover { transform: translateY(-10px); background: rgba(59, 130, 246, 0.05); }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-    <div id="loginSection" class="max-w-2xl mx-auto mt-10">
-        <div class="text-center mb-10">
-            <h1 class="text-4xl font-black mb-4 text-blue-500">منصة إدارة الموردين والربط المحاسبي</h1>
-            <p class="text-slate-400">سجل بيانات جهتك للدخول إلى لوحة التحكم الذكية</p>
-        </div>
-        
-        <form onsubmit="handleLogin(event)" class="glass p-8 rounded-3xl space-y-5">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs mb-2 text-slate-400">اسم الجهة/المؤسسة</label>
-                    <input type="text" required placeholder="شركة..." class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs mb-2 text-slate-400">رقم الهاتف</label>
-                    <input type="tel" required placeholder="05xxxxxxxx" class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-blue-500 outline-none">
-                </div>
+    <div id="marketingPage">
+        <nav class="fixed top-0 w-full z-50 glass p-4">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="text-xl font-black gradient-text">ENTERPRISE OS</div>
+                <button onclick="showLogin()" class="bg-blue-600 px-6 py-2 rounded-full font-bold text-sm">تسجيل الدخول</button>
             </div>
-            <div>
-                <label class="block text-xs mb-2 text-slate-400">إرفاق السجل التجاري أو وثيقة العمل الحر</label>
-                <input type="file" required class="w-full text-sm text-slate-400 file:bg-blue-600 file:text-white file:px-4 file:py-2 file:rounded-lg file:border-0 cursor-pointer">
+        </nav>
+
+        <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 gradient-text load-hidden">أتمتة ذكية لمؤسستك</h1>
+            <p class="text-slate-400 max-w-2xl mb-10 load-hidden">نظام متكامل يربط عملياتك المالية بأنظمة SAP ورواء، ويوثق مورديك بذكاء اصطناعي.</p>
+            <div class="flex gap-4 load-hidden">
+                <button onclick="showLogin()" class="bg-blue-600 px-10 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition">ابدأ الآن - 1600 ر.س</button>
             </div>
-            <button type="submit" class="w-full gradient-blue p-4 rounded-xl font-bold text-lg hover:opacity-90 transition">دخول آمن للمنصة</button>
-        </form>
+        </section>
+
+        <section class="py-20 max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-3xl service-card">
+                <div class="text-3xl mb-4">🔄</div>
+                <h3 class="font-bold text-xl mb-2">ربط SAP & رواء</h3>
+                <p class="text-slate-400 text-sm">سحب بيانات الفواتير (رقم، تاريخ، ضريبة) وتغذيتها في نظامك آلياً.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card">
+                <div class="text-3xl mb-4">💰</div>
+                <h3 class="font-bold text-xl mb-2">الأتمتة المالية</h3>
+                <p class="text-slate-400 text-sm">خصم عمولة 10% فورياً قبل تحويل المبالغ للمستفيدين.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card">
+                <div class="text-3xl mb-4">🛡️</div>
+                <h3 class="font-bold text-xl mb-2">الفحص الذكي</h3>
+                <p class="text-slate-400 text-sm">مطابقة الفواتير مع شروط هيئة الزكاة والضريبة والجمارك آلياً.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card">
+                <div class="text-3xl mb-4">📜</div>
+                <h3 class="font-bold text-xl mb-2">توثيق الموردين</h3>
+                <p class="text-slate-400 text-sm">نظام فحص السجلات التجارية ووثائق العمل الحر.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card">
+                <div class="text-3xl mb-4">📊</div>
+                <h3 class="font-bold text-xl mb-2">تقارير الـ PO</h3>
+                <p class="text-slate-400 text-sm">تتبع أوامر الشراء ومطابقتها مع المبالغ المصروفة.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card">
+                <div class="text-3xl mb-4">🚀</div>
+                <h3 class="font-bold text-xl mb-2">دعم فني 24/7</h3>
+                <p class="text-slate-400 text-sm">مرافقة تقنية لضمان عمل الأتمتة دون انقطاع.</p>
+            </div>
+        </section>
     </div>
 
-    <div id="dashboard" class="hidden max-w-6xl mx-auto">
-        <header class="flex justify-between items-center mb-10 border-b border-white/5 pb-6">
-            <h2 class="text-2xl font-bold text-blue-400 italic">Enterprise Suite</h2>
-            <div class="text-right">
-                <p class="text-sm text-slate-400">مرحباً بك في نظام الأتمتة</p>
-                <p class="text-xs text-green-500">الحالة: متصل بأنظمة SAP / رواء</p>
-            </div>
-        </header>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <div class="lg:col-span-2 glass p-8 rounded-3xl border-l-4 border-blue-500">
-                <h3 class="text-xl font-bold mb-6 flex items-center gap-2">🔄 أتمتة الربط المحاسبي (SAP & Rawaa)</h3>
-                <div class="bg-slate-900/50 p-6 rounded-2xl mb-6">
-                    <p class="text-sm leading-relaxed text-slate-300">
-                        يقوم النظام بربط إيميل المحاسب مباشرة؛ بمجرد وصول فاتورة من المورد، يتم استخراج البيانات التالية آلياً وتغذيتها في نظامكم المحاسبي:
-                    </p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-                        <div class="text-center p-2 glass rounded-lg"><p class="text-[10px] text-slate-500">رقم الفاتورة</p><p class="text-xs font-bold">INV-9902</p></div>
-                        <div class="text-center p-2 glass rounded-lg"><p class="text-[10px] text-slate-500">مبلغ الشراء</p><p class="text-xs font-bold">15,400 ر.س</p></div>
-                        <div class="text-center p-2 glass rounded-lg"><p class="text-[10px] text-slate-500">الضريبة</p><p class="text-xs font-bold">15% (VAT)</p></div>
-                        <div class="text-center p-2 glass rounded-lg"><p class="text-[10px] text-slate-500">رقم الـ PO</p><p class="text-xs font-bold text-blue-400">PO-778</p></div>
-                    </div>
+    <div id="loginModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
+        <div class="glass w-full max-w-md p-8 rounded-3xl relative">
+            <button onclick="hideLogin()" class="absolute top-4 left-4 text-slate-500">✕</button>
+            <h2 class="text-2xl font-bold mb-6 text-center">تسجيل بيانات المنشأة</h2>
+            <form onsubmit="doLogin(event)" class="space-y-4">
+                <input type="text" placeholder="اسم الجهة" required class="w-full p-4 rounded-xl bg-slate-900 border border-slate-800 outline-none focus:border-blue-500">
+                <input type="tel" placeholder="رقم الهاتف" required class="w-full p-4 rounded-xl bg-slate-900 border border-slate-800 outline-none focus:border-blue-500">
+                <div class="border-2 border-dashed border-slate-800 p-4 rounded-xl text-center">
+                    <p class="text-xs text-slate-500 mb-2 font-bold">إرفاق السجل أو وثيقة العمل الحر</p>
+                    <input type="file" required class="text-xs text-blue-400">
                 </div>
-                <button onclick="simulateVerification()" class="bg-white/5 border border-white/10 p-3 rounded-lg text-sm hover:bg-blue-600 transition w-full">تفعيل فحص مطابقة هيئة الزكاة والضريبة</button>
-                <p id="verificationStatus" class="mt-4 text-center font-bold text-sm"></p>
-            </div>
+                <button type="submit" class="w-full bg-blue-600 p-4 rounded-xl font-bold hover:bg-blue-700 transition">إتمام التسجيل والدخول</button>
+            </form>
+        </div>
+    </div>
 
-            <div class="glass p-8 rounded-3xl card-hover">
-                <h3 class="text-xl font-bold mb-6">💰 تسوية العمولات</h3>
-                <input type="number" id="amt" placeholder="مبلغ الفاتورة" class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 mb-4">
-                <div class="space-y-3">
-                    <div class="flex justify-between text-xs"><span>عمولة المنصة (10%):</span> <span id="fee" class="text-red-400">0.00</span></div>
-                    <div class="flex justify-between font-bold text-lg border-t border-white/5 pt-2"><span>صافي السداد:</span> <span id="net" class="text-green-400">0.00</span></div>
+    <div id="dashboard" class="hidden min-h-screen p-6 md:p-12">
+        <div class="max-w-6xl mx-auto">
+            <header class="flex justify-between items-center mb-10 border-b border-white/5 pb-6">
+                <h2 class="text-2xl font-black gradient-text">لوحة التحكم الذكية</h2>
+                <div class="text-left text-xs text-green-500 font-bold">● نظام الأتمتة نشط</div>
+            </header>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass p-8 rounded-3xl border-r-4 border-blue-600">
+                    <h3 class="font-bold mb-4 flex items-center gap-2">🔗 ربط المحاسب (SAP / رواء)</h3>
+                    <p class="text-sm text-slate-400 mb-6 font-bold">جارِ سحب البيانات من الفاتورة INV-001...</p>
+                    <div class="space-y-2 text-xs bg-black/40 p-4 rounded-xl font-mono">
+                        <p>رقم الفاتورة: <span class="text-blue-400">#98765</span></p>
+                        <p>قيمة الضريبة: <span class="text-blue-400">15%</span></p>
+                        <p>رقم الشراء PO: <span class="text-blue-400">7721-A</span></p>
+                    </div>
+                    <button onclick="alert('جاري التحقق من مطابقة هيئة الزكاة...')" class="mt-6 w-full py-2 border border-white/10 rounded-lg text-xs hover:bg-white/5">بدء الفحص الضريبي</button>
+                </div>
+
+                <div class="glass p-8 rounded-3xl">
+                    <h3 class="font-bold mb-4">💰 تسوية العمولة (10%)</h3>
+                    <input type="number" id="amt" placeholder="مبلغ الفاتورة" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-800 mb-6 outline-none focus:border-green-500">
+                    <div class="flex justify-between text-sm mb-2 text-slate-400"><span>عمولة المنصة:</span> <span id="fee" class="text-red-400">0.00</span></div>
+                    <div class="flex justify-between font-black text-xl border-t border-white/10 pt-4"><span>الصافي للمورد:</span> <span id="net" class="text-green-400">0.00</span></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function handleLogin(e) {
+        function showLogin() { document.getElementById('loginModal').classList.remove('hidden'); }
+        function hideLogin() { document.getElementById('loginModal').classList.add('hidden'); }
+        
+        function doLogin(e) {
             e.preventDefault();
-            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('marketingPage').classList.add('hidden');
+            document.getElementById('loginModal').classList.add('hidden');
             document.getElementById('dashboard').classList.remove('hidden');
-        }
-
-        function simulateVerification() {
-            const status = document.getElementById('verificationStatus');
-            status.innerText = "جاري فحص الفاتورة ومطابقتها مع متطلبات المؤسسة...";
-            status.className = "mt-4 text-center font-bold text-sm text-yellow-500";
-            
-            setTimeout(() => {
-                status.innerText = "⚠️ تم رفض الفاتورة: عدم مطابقة تفاصيل الضريبة لشروط هيئة الزكاة (QR Code مفقود)";
-                status.className = "mt-4 text-center font-bold text-sm text-red-500";
-            }, 2000);
+            window.scrollTo(0,0);
         }
 
         document.getElementById('amt').addEventListener('input', function(e){
@@ -102,6 +129,8 @@
             document.getElementById('fee').innerText = (val * 0.1).toFixed(2) + " ر.س";
             document.getElementById('net').innerText = (val * 0.9).toFixed(2) + " ر.س";
         });
+
+        ScrollReveal().reveal('.load-hidden', { delay: 200, duration: 1000, distance: '30px', origin: 'bottom' });
     </script>
 </body>
 </html>
