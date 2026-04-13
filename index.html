@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>لوحة التحكم الاحترافية</title>
+    <style>
+        :root { --primary: #007aff; --danger: #ff3b30; --bg: #f2f2f7; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; padding: 15px; }
+        .card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h2 { font-size: 18px; margin-top: 0; color: #1c1c1e; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .finance-row { display: flex; justify-content: space-between; margin: 10px 0; font-size: 16px; }
+        .fee { color: var(--danger); font-weight: bold; }
+        .net { color: #34c759; font-weight: bold; font-size: 18px; }
+        input[type="file"] { width: 100%; padding: 10px; margin: 10px 0; border: 1px dashed var(--primary); border-radius: 8px; }
+        button { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer; }
+        .video-note { font-size: 12px; color: #8e8e93; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>💰 النظام المالي (آلية الخصم)</h2>
+        <div class="finance-row"><span>المبلغ الكلي:</span> <span>1000 ريال</span></div>
+        <div class="finance-row"><span>العمولة (10%):</span> <span class="fee">-100 ريال</span></div>
+        <div class="finance-row"><span>الصافي للمستفيد:</span> <span class="net">900 ريال</span></div>
+        <button onclick="alert('تم اعتماد العملية بنجاح')">اعتماد وسحب الأرباح</button>
+    </div>
+
+    <div class="card">
+        <h2>✅ توثيق مقدمي الخدمة</h2>
+        <p class="video-note">ارفع صورة السجل التجاري أو شهادة العمل الحر للتحقق:</p>
+        <input type="file" accept="image/*">
+        <button style="background: #5856d6;">رفع المستند</button>
+    </div>
+
+    <div class="card">
+        <h2>🎥 عرض الخدمات (ميديا)</h2>
+        <p class="video-note">مسموح بفيديوهات أقل من 10 ثوانٍ وصور:</p>
+        <input type="file" accept="image/*,video/*" id="mediaInput">
+        <button style="background: #32d74b;">إضافة للمتجر</button>
+    </div>
+
+</body>
+</html>
