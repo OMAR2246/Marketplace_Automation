@@ -3,227 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurela Enterprise | الأتمتة الاحترافية</title>
+    <title>Aurela v5 | المنصة المتكاملة للأتمتة والفواتير</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        body { background-color: #020617; color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); }
-        .gradient-bg { background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+        body { background: #020617; color: #f8fafc; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
+        .accent-gradient { background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%); }
+        .card-hover:hover { transform: translateY(-10px); border-color: #22d3ee; transition: all 0.4s ease; }
         .hidden { display: none; }
-        
-        /* تنسيق الريلز بأسلوب الواجهة الأولى الفخم */
-        .reels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .reel-box { 
-            height: 500px; border-radius: 40px; overflow: hidden; position: relative; 
-            border: 1px solid rgba(255,255,255,0.1); background: #0f172a;
-        }
-        .reel-video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-        .reel-content { 
-            position: absolute; inset: 0; display: flex; flex-direction: column; 
-            justify-content: flex-end; padding: 40px 30px; 
-            background: linear-gradient(to top, #020617 20%, transparent);
-        }
+        .tab-active { border-bottom: 3px solid #22d3ee; color: #22d3ee; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed top-0 w-full z-50 glass p-5">
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 p-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 gradient-bg rounded-2xl flex items-center justify-center font-black text-xl shadow-xl shadow-cyan-500/20">A</div>
-                <span class="text-3xl font-black tracking-tighter italic">AURELA</span>
+                <div class="w-10 h-10 accent-gradient rounded-xl flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20">A</div>
+                <span class="text-2xl font-black tracking-tight">AURELA</span>
             </div>
-            <button onclick="showLogin()" class="gradient-bg px-8 py-3 rounded-full font-black text-sm shadow-2xl hover:scale-105 transition">دخول المنصة</button>
+            <div class="hidden md:flex gap-8 text-sm font-bold text-slate-400">
+                <a href="#" class="hover:text-cyan-400">الأتمتة المحاسبية</a>
+                <a href="#" class="hover:text-cyan-400">الفواتير الضريبية</a>
+                <a href="#" class="hover:text-cyan-400">الضمان الذهبي</a>
+            </div>
+            <button onclick="showLogin()" class="accent-gradient px-7 py-2.5 rounded-full font-bold text-sm text-white hover:brightness-110 transition">دخول المشتركين</button>
         </div>
     </nav>
 
-    <main id="marketingPage" class="pt-40 px-6 pb-20">
-        <header class="text-center mb-24">
-            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-tight">أتمتة المحاسبة<br><span class="text-cyan-400">بذكاء مؤسسي</span></h1>
-            <p class="text-slate-400 max-w-2xl mx-auto text-xl italic font-light">نظام يربط الكادر الوظيفي والأنظمة المحاسبية العالمية في منصة واحدة.</p>
-        </header>
+    <main id="marketingPage" class="pt-32 px-6">
+        <div class="text-center mb-20">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">حلول برمجية <br><span class="text-cyan-400">تنمو مع أعمالك</span></h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">أتمتة العمليات المحاسبية وإصدار الفواتير الضريبية المعتمدة في منصة واحدة ذكية وسهلة الاستخدام.</p>
+        </div>
 
-        <div class="max-w-7xl mx-auto reels-grid">
-            <div class="reel-box group">
-                <video class="reel-video" autoplay loop muted playsinline>
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-code-screen-close-up-34395-large.mp4" type="video/mp4">
-                </video>
-                <div class="reel-content">
-                    <div class="w-12 h-12 bg-cyan-500 rounded-xl mb-4 flex items-center justify-center text-2xl">📩</div>
-                    <h3 class="text-2xl font-black mb-2 text-cyan-400">سحب الفواتير</h3>
-                    <p class="text-sm text-slate-300">سحب آلي من إيميلات المحاسبين والموظفين دون تدخل بشري.</p>
-                </div>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-24">
+            <div class="glass p-10 rounded-[2.5rem] card-hover relative overflow-hidden group">
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl"></div>
+                <h3 class="text-2xl font-black mb-4">الأتمتة والربط (ERP)</h3>
+                <p class="text-slate-400 text-sm mb-6 leading-relaxed">اربط موظفيك وأنظمتك العالمية (SAP, رواء، قيود) وقم بأتمتة سحب الفواتير من الإيميلات فوراً.</p>
+                <button onclick="showLogin()" class="text-cyan-400 font-bold flex items-center gap-2">استكشف الباقات <span class="group-hover:mr-2 transition-all">←</span></button>
             </div>
 
-            <div class="reel-box group">
-                <video class="reel-video" autoplay loop muted playsinline>
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-working-on-a-computer-keyboard-40546-large.mp4" type="video/mp4">
-                </video>
-                <div class="reel-content">
-                    <div class="w-12 h-12 bg-blue-500 rounded-xl mb-4 flex items-center justify-center text-2xl">🔗</div>
-                    <h3 class="text-2xl font-black mb-2 text-blue-400">الربط والتشغيل</h3>
-                    <p class="text-sm text-slate-300">مزامنة فورية مع أنظمة SAP, Oracle, رواء، وقيود.</p>
-                </div>
-            </div>
-
-            <div class="reel-box group">
-                <video class="reel-video" autoplay loop muted playsinline>
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-growing-graph-and-data-22530-large.mp4" type="video/mp4">
-                </video>
-                <div class="reel-content">
-                    <div class="w-12 h-12 bg-purple-500 rounded-xl mb-4 flex items-center justify-center text-2xl">🏆</div>
-                    <h3 class="text-2xl font-black mb-2 text-purple-400">الضمان الذهبي</h3>
-                    <p class="text-sm text-slate-300">ضمان تحصيل الأرباح واسترداد المبالغ غير المستهلكة.</p>
-                </div>
+            <div class="glass p-10 rounded-[2.5rem] card-hover relative overflow-hidden group border-cyan-500/20">
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"></div>
+                <h3 class="text-2xl font-black mb-4">نظام الفواتير الضريبية</h3>
+                <p class="text-slate-400 text-sm mb-6 leading-relaxed">إصدار فواتير مطابقة لهيئة الزكاة والضريبة مع باركود ذكي وترقيم تسلسلي وحفظ آلي للبيانات.</p>
+                <button onclick="showLogin()" class="text-blue-400 font-bold flex items-center gap-2">ابدأ الإصدار <span class="group-hover:mr-2 transition-all">←</span></button>
             </div>
         </div>
     </main>
 
-    <div id="loginModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-6 bg-black/95 backdrop-blur-3xl">
-        <div class="glass w-full max-w-md p-12 rounded-[3.5rem] relative text-center">
+    <div id="loginModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-6 bg-slate-950/95 backdrop-blur-md">
+        <div class="glass w-full max-w-md p-10 rounded-[3rem] text-center border-white/10">
             <div id="otpStep1">
-                <h2 class="text-4xl font-black mb-4">تسجيل دخول</h2>
-                <p class="text-slate-500 mb-10">أدخل رقم الجوال ليصلك الرمز مجاناً</p>
-                <input type="tel" id="userPhone" placeholder="05xxxxxxxx" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 mb-8 text-center text-2xl outline-none focus:border-cyan-500">
-                <button onclick="sendOTP()" class="w-full gradient-bg p-5 rounded-2xl font-black text-xl shadow-xl">إرسال الرمز</button>
+                <h2 class="text-3xl font-black mb-2">مرحباً بك</h2>
+                <p class="text-slate-500 text-sm mb-8">أدخل رقم الجوال للتحقق والدخول</p>
+                <input type="tel" id="userPhone" placeholder="05xxxxxxxx" class="w-full p-4 rounded-2xl bg-slate-900 border border-white/5 mb-6 text-center text-xl outline-none focus:border-cyan-500">
+                <button onclick="simulateOTP()" class="w-full accent-gradient p-4 rounded-2xl font-black text-white shadow-lg shadow-cyan-500/20">إرسال الرمز</button>
             </div>
             
             <div id="otpStep2" class="hidden">
-                <h2 class="text-3xl font-black mb-2">تأكيد الرمز</h2>
-                <p class="text-cyan-500 text-xs mb-8 italic">الكود التجريبي: 2026</p>
+                <h2 class="text-3xl font-black mb-6">تأكيد الرمز</h2>
                 <div class="flex justify-center gap-3 mb-8" dir="ltr">
-                    <input type="text" maxlength="1" class="w-12 h-16 bg-white/5 border border-white/10 rounded-2xl text-center text-3xl font-bold">
-                    <input type="text" maxlength="1" class="w-12 h-16 bg-white/5 border border-white/10 rounded-2xl text-center text-3xl font-bold">
-                    <input type="text" maxlength="1" class="w-12 h-16 bg-white/5 border border-white/10 rounded-2xl text-center text-3xl font-bold">
-                    <input type="text" maxlength="1" class="w-12 h-16 bg-white/5 border border-white/10 rounded-2xl text-center text-3xl font-bold">
+                    <input type="text" maxlength="1" class="w-12 h-14 bg-slate-900 border border-white/10 rounded-xl text-center text-2xl font-bold">
+                    <input type="text" maxlength="1" class="w-12 h-14 bg-slate-900 border border-white/10 rounded-xl text-center text-2xl font-bold">
+                    <input type="text" maxlength="1" class="w-12 h-14 bg-slate-900 border border-white/10 rounded-xl text-center text-2xl font-bold">
+                    <input type="text" maxlength="1" class="w-12 h-14 bg-slate-900 border border-white/10 rounded-xl text-center text-2xl font-bold">
                 </div>
-                <div id="timer" class="text-2xl font-mono text-slate-500 mb-8">02:00</div>
-                <button onclick="showPricing()" class="w-full bg-green-600 p-5 rounded-2xl font-black text-xl">تحقق ودخول</button>
+                <button onclick="showServices()" class="w-full bg-emerald-500 p-4 rounded-2xl font-black text-white">تأكيد الدخول</button>
             </div>
         </div>
     </div>
 
-    <div id="pricingPage" class="hidden pt-40 px-6 max-w-7xl mx-auto pb-20">
-        <h2 class="text-5xl font-black text-center mb-16">باقات التشغيل والربط</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass p-10 rounded-[3rem] border-white/5">
-                <h3 class="text-2xl font-bold mb-4">باقة 10 موظفين</h3>
-                <div class="text-5xl font-black mb-8 italic text-cyan-400">2500 <span class="text-sm">ر.س</span></div>
-                <ul class="text-sm space-y-4 mb-10 text-slate-400">
-                    <li>✓ تشمل الأدمن + 10 موظفين</li>
-                    <li>✓ ربط نظام محاسبي واحد</li>
-                    <li>✓ أتمتة الإيميلات</li>
-                </ul>
-                <button onclick="goToDash()" class="w-full py-4 rounded-2xl border border-cyan-500 text-cyan-500 font-bold">اشترك الآن</button>
-            </div>
+    <div id="servicesPage" class="hidden pt-28 px-6 max-w-7xl mx-auto pb-20">
+        <div class="flex justify-center gap-10 mb-16 border-b border-white/5">
+            <button onclick="switchTab('automation')" id="tabAuto" class="pb-4 font-bold tab-active">أتمتة الأنظمة</button>
+            <button onclick="switchTab('invoicing')" id="tabInv" class="pb-4 font-bold text-slate-500">إصدار الفواتير</button>
+        </div>
 
-            <div class="glass p-10 rounded-[3rem] border-cyan-500 shadow-2xl scale-105 relative">
-                <div class="absolute -top-5 right-10 bg-cyan-500 text-black px-4 py-1 rounded-full text-xs font-black">الأكثر طلباً</div>
-                <h3 class="text-2xl font-bold mb-4">باقة 30 موظف</h3>
-                <div class="text-5xl font-black mb-8 italic text-cyan-400">4000 <span class="text-sm">ر.س</span></div>
-                <ul class="text-sm space-y-4 mb-10 text-slate-400">
-                    <li>✓ من 10 إلى 30 موظف</li>
-                    <li>✓ دعم فني مباشر 24/7</li>
-                    <li>✓ ربط جميع الأنظمة</li>
-                </ul>
-                <button onclick="goToDash()" class="w-full py-4 gradient-bg rounded-2xl font-black">اشترك الآن</button>
+        <div id="automationContent" class="grid md:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-[2.5rem] border-white/5 text-center">
+                <h3 class="font-bold text-slate-400 mb-2">باقة 10 موظفين</h3>
+                <div class="text-4xl font-black mb-6">2500 <span class="text-sm">ر.س</span></div>
+                <button class="w-full py-3 rounded-xl border border-cyan-500 text-cyan-400 font-bold hover:bg-cyan-500 hover:text-white transition">اشترك الآن</button>
             </div>
-
-            <div class="glass p-10 rounded-[3rem] border-white/5">
-                <h3 class="text-2xl font-bold mb-4">باقة الشركات</h3>
-                <div class="text-5xl font-black mb-8 italic text-cyan-400">15000 <span class="text-sm">ر.س</span></div>
-                <ul class="text-sm space-y-4 mb-10 text-slate-400">
-                    <li>✓ من 30 إلى 100 موظف</li>
-                    <li>✓ ضمان ذهبي للاسترداد</li>
-                    <li>✓ ضمان تحصيل الأرباح والنسب</li>
-                </ul>
-                <button onclick="goToDash()" class="w-full py-4 rounded-2xl border border-purple-500 text-purple-500 font-bold">اشترك الآن</button>
+            <div class="glass p-8 rounded-[2.5rem] border-cyan-500/50 text-center scale-105 shadow-2xl">
+                <h3 class="font-bold text-cyan-400 mb-2">باقة 30 موظف</h3>
+                <div class="text-4xl font-black mb-6">4000 <span class="text-sm">ر.س</span></div>
+                <button class="w-full py-3 accent-gradient rounded-xl text-white font-black">اشترك الآن</button>
+            </div>
+            <div class="glass p-8 rounded-[2.5rem] border-white/5 text-center">
+                <h3 class="font-bold text-slate-400 mb-2">باقة الشركات</h3>
+                <div class="text-4xl font-black mb-6">15000 <span class="text-sm">ر.س</span></div>
+                <button class="w-full py-3 rounded-xl border border-purple-500 text-purple-400 font-bold hover:bg-purple-500 hover:text-white transition">اشترك الآن</button>
             </div>
         </div>
 
-        <div class="mt-24 p-12 glass rounded-[4rem] text-center border-yellow-500/20 shadow-2xl">
-            <h3 class="text-3xl font-black text-yellow-500 mb-6">🏆 سياسة الضمان الذهبي</h3>
-            <p class="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
-                نحن في Aurela نضمن لك تحصيل كافة الأرباح والنسب المتفق عليها. وفي حال رغبتك في إلغاء الخدمة لأي سبب، نقوم بخصم عدد أيام الاستهلاك الفعلي فقط واسترداد كامل باقي المبلغ لك فوراً.
-            </p>
-        </div>
-    </div>
-
-    <div id="dashboard" class="hidden pt-40 px-6 max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-4 gap-8">
-            <div class="lg:col-span-1 glass p-8 rounded-[3rem]">
-                <h3 class="font-black text-cyan-400 mb-8 uppercase text-sm">إعدادات الإدارة</h3>
-                <div class="space-y-6">
-                    <div>
-                        <label class="text-[10px] text-slate-500 font-bold">نوع نظام الـ ERP</label>
-                        <select class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl text-xs mt-2">
-                            <option>SAP S/4HANA</option>
-                            <option>Oracle NetSuite</option>
-                            <option>Rawaa (رواء)</option>
-                            <option>Qoyod (قيود)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-slate-500 font-bold">إيميلات المحاسبين والموظفين</label>
-                        <textarea placeholder="أدخل الإيميلات للربط..." class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl text-xs mt-2 h-24"></textarea>
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-slate-500 font-bold">يوزرات الحسابات للبرامج</label>
-                        <input type="text" placeholder="Admin_User_01" class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl text-xs mt-2">
-                    </div>
-                    <button class="w-full py-4 gradient-bg rounded-2xl font-black text-sm">تفعيل المزامنة</button>
+        <div id="invoicingContent" class="hidden">
+            <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="glass p-6 rounded-3xl text-center border-white/5">
+                    <h3 class="text-sm font-bold text-slate-400 mb-1">30 فاتورة</h3>
+                    <div class="text-2xl font-black mb-4">300 <span class="text-xs">ر.س</span></div>
+                    <button class="w-full py-2 bg-white/5 rounded-lg text-xs font-bold hover:bg-cyan-500 transition">اختيار</button>
+                </div>
+                <div class="glass p-6 rounded-3xl text-center border-white/5">
+                    <h3 class="text-sm font-bold text-slate-400 mb-1">50 فاتورة</h3>
+                    <div class="text-2xl font-black mb-4">450 <span class="text-xs">ر.س</span></div>
+                    <button class="w-full py-2 bg-white/5 rounded-lg text-xs font-bold hover:bg-cyan-500 transition">اختيار</button>
+                </div>
+                <div class="glass p-6 rounded-3xl text-center border-cyan-500/30">
+                    <h3 class="text-sm font-bold text-cyan-400 mb-1">100 فاتورة</h3>
+                    <div class="text-2xl font-black mb-4">650 <span class="text-xs">ر.س</span></div>
+                    <button class="w-full py-2 accent-gradient rounded-lg text-xs font-black">اختيار</button>
+                </div>
+                <div class="glass p-6 rounded-3xl text-center border-white/5">
+                    <h3 class="text-sm font-bold text-slate-400 mb-1">حتى 500 فاتورة</h3>
+                    <div class="text-2xl font-black mb-4">1800 <span class="text-xs">ر.س</span></div>
+                    <button class="w-full py-2 bg-white/5 rounded-lg text-xs font-bold hover:bg-cyan-500 transition">اختيار</button>
                 </div>
             </div>
             
-            <div class="lg:col-span-3 glass p-10 rounded-[3rem]">
-                <div class="flex justify-between items-center mb-10">
-                    <h3 class="text-2xl font-black">مراقبة الأتمتة الحية</h3>
-                    <div class="flex items-center gap-2 text-green-500 font-bold text-sm">
-                        <span class="w-3 h-3 bg-green-500 rounded-full animate-ping"></span>
-                        النظام يعمل
-                    </div>
+            <div class="mt-8 glass p-8 rounded-[2.5rem] flex flex-col md:flex-row justify-between items-center border-emerald-500/20">
+                <div>
+                    <h3 class="text-xl font-black text-emerald-400">الباقة اللامحدودة (VIP)</h3>
+                    <p class="text-slate-500 text-sm">إصدار فواتير بلا قيود مع دعم فني متقدم</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center gap-6">
+                    <span class="text-3xl font-black italic">800 <span class="text-sm">ر.س/شهر</span></span>
+                    <button class="px-10 py-4 bg-emerald-500 rounded-2xl font-black text-white shadow-lg shadow-emerald-500/10">اشترك الآن</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-20 p-10 glass rounded-[3rem] border-yellow-500/10 text-center">
+            <h3 class="text-2xl font-black text-yellow-500 mb-4">🏆 الضمان الذهبي</h3>
+            <p class="text-slate-400 text-sm italic max-w-2xl mx-auto">نضمن لك تحصيل الأرباح ومطابقة الفواتير للأنظمة الحكومية. في حال إلغاء الخدمة، يتم استرداد المبلغ المتبقي بعد خصم أيام الاستهلاك فوراً.</p>
+        </div>
+    </div>
+
+    <div id="invoiceEditor" class="hidden pt-28 px-6 max-w-4xl mx-auto pb-20">
+        <div class="glass p-10 rounded-[3rem]">
+            <div class="flex justify-between items-start mb-12">
+                <div>
+                    <h2 class="text-2xl font-black mb-2 text-cyan-400">إصدار فاتورة ضريبية</h2>
+                    <p class="text-xs text-slate-500 uppercase tracking-widest">Tax Invoice | #INV-0001</p>
+                </div>
+                <div class="w-24 h-24 bg-white p-2 rounded-xl flex items-center justify-center font-bold text-black text-[8px] text-center">
+                    [QR CODE]<br>ZATCA APPROVED
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-10 text-sm">
+                <div class="space-y-4">
+                    <label class="block text-slate-500 text-xs font-bold uppercase">بيانات المصدر (أنت)</label>
+                    <input type="text" placeholder="اسم المؤسسة / الشركة" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl outline-none focus:border-cyan-500">
+                    <input type="text" placeholder="السجل التجاري" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl outline-none focus:border-cyan-500">
+                    <input type="text" placeholder="الرقم الضريبي" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl outline-none focus:border-cyan-500">
                 </div>
                 <div class="space-y-4">
-                    <div class="p-6 bg-white/5 rounded-3xl border border-white/5 flex justify-between items-center italic">
-                        <span>سحب فاتورة مورد #2291 | تم التحقق من الإيميل: acc@comp.com</span>
-                        <span class="text-cyan-400 font-bold">تم الترحيل لـ SAP</span>
+                    <label class="block text-slate-500 text-xs font-bold uppercase">بيانات العميل (الجهة المطالبة)</label>
+                    <input type="text" placeholder="اسم العميل / الشركة" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl outline-none focus:border-cyan-500">
+                    <input type="text" placeholder="الرقم الضريبي للعميل" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl outline-none focus:border-cyan-500">
+                    <input type="text" placeholder="عنوان العميل" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl outline-none focus:border-cyan-500">
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <label class="block text-slate-500 text-xs font-bold uppercase mb-4">تفاصيل الخدمة / المنتج</label>
+                <textarea placeholder="وصف الخدمة المقدمة..." class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl h-24 outline-none focus:border-cyan-500 mb-4"></textarea>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <span class="text-[10px] text-slate-500">تاريخ الخدمة</span>
+                        <input type="date" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl outline-none">
                     </div>
-                    <div class="p-6 bg-white/5 rounded-3xl border border-white/5 flex justify-between items-center italic">
-                        <span>مزامنة يوزر الموظف: سارة | النظام المرتبط: رواء</span>
-                        <span class="text-blue-400 font-bold">مكتمل</span>
+                    <div>
+                        <span class="text-[10px] text-slate-500">القيمة (بدون ضريبة)</span>
+                        <input type="number" placeholder="0.00" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl outline-none">
                     </div>
                 </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex justify-between items-center">
+                <div class="text-right">
+                    <p class="text-slate-500 text-xs">الإجمالي شامل الضريبة (15%)</p>
+                    <p class="text-3xl font-black text-cyan-400 mt-1">0.00 <span class="text-sm">ر.س</span></p>
+                </div>
+                <button class="accent-gradient px-12 py-4 rounded-2xl font-black shadow-xl shadow-cyan-500/20">تصدير PDF</button>
             </div>
         </div>
     </div>
 
     <script>
         function showLogin() { document.getElementById('loginModal').classList.remove('hidden'); }
-        function sendOTP() {
+        
+        function simulateOTP() {
             document.getElementById('otpStep1').classList.add('hidden');
             document.getElementById('otpStep2').classList.remove('hidden');
-            startTimer(120);
         }
-        function startTimer(duration) {
-            let timer = duration, m, s;
-            setInterval(() => {
-                m = parseInt(timer / 60, 10);
-                s = parseInt(timer % 60, 10);
-                document.getElementById('timer').innerText = (m<10?"0":"")+m+":"+(s<10?"0":"")+s;
-                if (--timer < 0) timer = 0;
-            }, 1000);
-        }
-        function showPricing() {
+
+        function showServices() {
             document.getElementById('loginModal').classList.add('hidden');
             document.getElementById('marketingPage').classList.add('hidden');
-            document.getElementById('pricingPage').classList.remove('hidden');
+            document.getElementById('servicesPage').classList.remove('hidden');
             window.scrollTo(0,0);
         }
-        function goToDash() {
-            document.getElementById('pricingPage').classList.add('hidden');
-            document.getElementById('dashboard').classList.remove('hidden');
-            window.scrollTo(0,0);
+
+        function switchTab(type) {
+            const autoBtn = document.getElementById('tabAuto');
+            const invBtn = document.getElementById('tabInv');
+            const autoContent = document.getElementById('automationContent');
+            const invContent = document.getElementById('invoicingContent');
+
+            if(type === 'automation') {
+                autoBtn.className = 'pb-4 font-bold tab-active';
+                invBtn.className = 'pb-4 font-bold text-slate-500';
+                autoContent.classList.remove('hidden');
+                invContent.classList.add('hidden');
+            } else {
+                invBtn.className = 'pb-4 font-bold tab-active';
+                autoBtn.className = 'pb-4 font-bold text-slate-500';
+                invContent.classList.remove('hidden');
+                autoContent.classList.add('hidden');
+            }
         }
     </script>
 </body>
