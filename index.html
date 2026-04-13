@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMINA | المنصة المالية الموثوقة</title>
+    <title>LUMINA | المنصة المالية المتكاملة</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;700;900&display=swap');
         :root { --accent: #00e5ff; --bg: #010409; }
         body { background-color: var(--bg); color: #e6edf3; font-family: 'Cairo', sans-serif; transition: 0.3s; }
         .font-ruqaa { font-family: 'Aref Ruqaa', serif; }
-        .executive-card { background: rgba(22, 27, 34, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; transition: 0.4s; }
+        .executive-card { background: rgba(22, 27, 34, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; transition: 0.4s; overflow: hidden; }
+        .executive-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .btn-cyan { background: linear-gradient(135deg, #00e5ff, #2979ff); color: #010409 !important; font-weight: 800; border-radius: 12px; }
-        .search-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; color: white; width: 200px; outline: none; transition: 0.3s; }
-        .search-box:focus { border-color: var(--accent); width: 260px; }
-        .input-premium { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 12px; color: white; outline: none; transition: 0.3s; font-size: 13px; }
-        .upload-zone { border: 2px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .upload-zone:hover { border-color: var(--accent); background: rgba(0, 229, 255, 0.05); }
-        .hidden { display: none !important; }
+        .input-premium { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 12px; color: white; outline: none; }
+        .upload-zone { border: 2px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; }
         .shimmer { background: linear-gradient(90deg, #fff, #4a5568, #fff); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s infinite linear; }
         @keyframes shimmer { 0% { background-position: -200%; } 100% { background-position: 200%; } }
+        .feature-list li { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; color: #94a3b8; }
+        .feature-list li::before { content: '✓'; color: var(--accent); font-weight: bold; }
+        .badge-hot { background: #00e5ff; color: #010409; padding: 4px 12px; font-size: 10px; font-weight: 900; border-radius: 0 0 0 12px; position: absolute; top: 0; left: 0; }
     </style>
 </head>
 <body>
@@ -28,13 +28,14 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
                 <button onclick="showSection('home')" class="text-slate-400 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg></button>
-                <div class="flex items-center gap-2 cursor-pointer" onclick="showSection('home')"><div class="w-8 h-8 btn-cyan flex items-center justify-center text-xl font-black">L</div><span class="text-xl font-black font-ruqaa shimmer">لومينا</span></div>
+                <div class="flex items-center gap-2"><div class="w-8 h-8 btn-cyan flex items-center justify-center text-xl font-black">L</div><span class="text-xl font-black font-ruqaa shimmer">لومينا</span></div>
             </div>
-            <div class="hidden md:block"><input type="text" class="search-box text-xs data-lang-ph" data-ar-ph="بحث عن باقة..." data-en-ph="Search plans..." placeholder="بحث عن باقة..."></div>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleLang()" id="langBtn" class="px-3 py-1 border border-white/10 rounded-lg text-[10px] font-bold text-cyan-400">EN</button>
-                <div id="guestActions" class="flex gap-2"><button onclick="showSection('auth')" class="text-[10px] font-bold data-lang" data-ar="تسجيل دخول" data-en="Login">تسجيل دخول</button><button onclick="showSection('auth')" class="btn-cyan px-4 py-2 text-[10px] data-lang" data-ar="إنشاء حساب" data-en="Sign Up">إنشاء حساب</button></div>
-                <div id="navUser" class="hidden flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full border border-white/10"><span class="text-[10px] font-bold" id="userNameNav"></span><div class="w-6 h-6 bg-cyan-500/20 rounded-full flex items-center justify-center text-[10px]">👤</div></div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleLang()" class="px-3 py-1 border border-white/10 rounded-lg text-[10px] font-bold text-cyan-400">EN</button>
+                <div id="guestActions" class="flex gap-2">
+                    <button onclick="showSection('auth')" class="text-[10px] font-bold">تسجيل دخول</button>
+                    <button onclick="showSection('auth')" class="btn-cyan px-4 py-2 text-[10px]">إنشاء حساب</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -43,118 +44,107 @@
         
         <div id="homeSection">
             <div class="text-center mb-16">
-                <h1 class="font-ruqaa text-6xl font-black mb-4 shimmer data-lang" data-ar="المنصة المالية المتكاملة" data-en="Integrated Finance Platform">المنصة المالية المتكاملة</h1>
+                <h1 class="font-ruqaa text-5xl md:text-7xl font-black mb-4 shimmer">الخدمات والباقات المتاحة</h1>
+                <p class="text-slate-500">اختر الخطة المناسبة لحجم أعمالك</p>
             </div>
 
-            <div class="mb-12">
-                <h2 class="font-ruqaa text-2xl mb-6 text-cyan-400 data-lang" data-ar="باقات الفوترة" data-en="Billing Plans">باقات الفوترة</h2>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="executive-card p-6 text-center">
-                        <h3 class="font-bold mb-2">150 SAR</h3>
-                        <button onclick="openReg('باقة 150')" class="w-full btn-cyan py-3 text-xs">اشترك الآن</button>
+            <div class="mb-20">
+                <h2 class="font-ruqaa text-3xl mb-10 text-cyan-400 border-r-4 border-cyan-400 pr-4">باقات تصدير الفواتير</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="executive-card p-8 relative">
+                        <h3 class="text-xl font-bold mb-2">باقة الانطلاق (Starter)</h3>
+                        <div class="text-4xl font-black mb-6">199 <span class="text-sm font-normal">SAR</span></div>
+                        <ul class="feature-list mb-8">
+                            <li>إصدار 50 فاتورة ضريبية</li>
+                            <li>ربط ZATCA الأساسي</li>
+                            <li>أتمتة مخزون بسيطة</li>
+                            <li>دعم فني عبر التطبيق</li>
+                        </ul>
+                        <button onclick="openReg()" class="w-full btn-cyan py-4">اشترك الآن</button>
                     </div>
-                    <div class="executive-card p-6 text-center border-cyan-500/30">
-                        <h3 class="font-bold mb-2">450 SAR</h3>
-                        <button onclick="openReg('باقة 450')" class="w-full btn-cyan py-3 text-xs">اشترك الآن</button>
+
+                    <div class="executive-card p-8 relative border-cyan-500/40">
+                        <div class="badge-hot">الأكثر طلباً</div>
+                        <h3 class="text-xl font-bold mb-2">باقة النمو (Business)</h3>
+                        <div class="text-4xl font-black mb-6">499 <span class="text-sm font-normal">SAR</span></div>
+                        <ul class="feature-list mb-8">
+                            <li>فواتير غير محدودة</li>
+                            <li>إدارة محفظة بنكية كاملة</li>
+                            <li>ربط API مباشر (أتمتة كاملة)</li>
+                            <li>تحليلات بيانية متقدمة</li>
+                        </ul>
+                        <button onclick="openReg()" class="w-full btn-cyan py-4">اشترك الآن</button>
                     </div>
-                    <div class="executive-card p-6 text-center">
-                        <h3 class="font-bold mb-2">900 SAR</h3>
-                        <button onclick="openReg('باقة 900')" class="w-full btn-cyan py-3 text-xs">اشترك الآن</button>
+
+                    <div class="executive-card p-8">
+                        <h3 class="text-xl font-bold mb-2">حلول المؤسسات (Custom)</h3>
+                        <div class="text-2xl font-black mb-6 text-slate-400">تواصل معنا</div>
+                        <ul class="feature-list mb-8">
+                            <li>سيرفرات خاصة معزولة</li>
+                            <li>أمن سيبراني مخصص</li>
+                            <li>مدير حساب خاص</li>
+                            <li>تكامل مع أنظمة ERP</li>
+                        </ul>
+                        <button onclick="openReg()" class="w-full border border-white/10 hover:bg-white/5 py-4 rounded-xl transition">تواصل معنا</button>
                     </div>
                 </div>
             </div>
 
             <div>
-                <h2 class="font-ruqaa text-2xl mb-6 text-blue-400 data-lang" data-ar="باقات الأتمتة" data-en="Automation Plans">باقات الأتمتة</h2>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="executive-card p-6 text-center">
-                        <h3 class="font-bold mb-2">2,500 SAR</h3>
-                        <button onclick="openReg('أتمتة 2500')" class="w-full btn-cyan py-3 text-xs">اشترك الآن</button>
+                <h2 class="font-ruqaa text-3xl mb-10 text-blue-400 border-r-4 border-blue-400 pr-4">باقات الأتمتة والربط</h2>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="executive-card p-8">
+                        <h3 class="font-bold mb-2">أتمتة (10 موظفين)</h3>
+                        <p class="text-3xl font-black mb-6">2,500 <span class="text-xs">SAR</span></p>
+                        <button onclick="openReg()" class="w-full btn-cyan py-3">اشترك الآن</button>
                     </div>
-                    <div class="executive-card p-6 text-center bg-blue-500/5">
-                        <h3 class="font-bold mb-2">4,500 SAR</h3>
-                        <button onclick="openReg('أتمتة 4500')" class="w-full btn-cyan py-3 text-xs">اشترك الآن</button>
+                    <div class="executive-card p-8">
+                        <h3 class="font-bold mb-2">أتمتة (30 موظف)</h3>
+                        <p class="text-3xl font-black mb-6">4,500 <span class="text-xs">SAR</span></p>
+                        <button onclick="openReg()" class="w-full btn-cyan py-3">اشترك الآن</button>
                     </div>
-                    <div class="executive-card p-6 text-center">
-                        <h3 class="font-bold mb-2">6,000 SAR</h3>
-                        <button onclick="openReg('أتمتة 6000')" class="w-full btn-cyan py-3 text-xs">اشترك الآن</button>
+                    <div class="executive-card p-8">
+                        <h3 class="font-bold mb-2">أتمتة (100 موظف)</h3>
+                        <p class="text-3xl font-black mb-6">6,000 <span class="text-xs">SAR</span></p>
+                        <button onclick="openReg()" class="w-full btn-cyan py-3">اشترك الآن</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="authSection" class="hidden max-w-2xl mx-auto py-10">
+        <div id="authSection" class="hidden max-w-2xl mx-auto">
             <div class="executive-card p-10 relative">
-                <button onclick="showSection('home')" class="absolute top-6 left-6 text-slate-500 hover:text-white">✕</button>
-                <h2 class="font-ruqaa text-4xl mb-8 text-center text-cyan-400 data-lang" data-ar="إنشاء حساب رسمي" data-en="Official Registration">إنشاء حساب رسمي</h2>
-                
-                <div class="grid md:grid-cols-2 gap-5">
-                    <div>
-                        <label class="text-[10px] text-slate-500 mb-1 block">نوع النشاط</label>
-                        <select id="uType" class="input-premium bg-slate-900">
-                            <option>فرد مستقل</option>
-                            <option>مؤسسة</option>
-                            <option>شركة</option>
-                        </select>
-                    </div>
-                    <div><label class="text-[10px] text-slate-500 mb-1 block">الاسم الكامل</label><input type="text" id="uName" class="input-premium" placeholder="محمد أحمد"></div>
-                    <div class="md:col-span-2"><label class="text-[10px] text-slate-500 mb-1 block">اسم المنشأة</label><input type="text" id="uOrg" class="input-premium" placeholder="شركة لومينا التقنية"></div>
+                <button onclick="showSection('home')" class="absolute top-6 left-6 text-slate-500">✕</button>
+                <h2 class="font-ruqaa text-4xl mb-8 text-center text-cyan-400">تفعيل الهوية الرقمية</h2>
+                <div class="grid gap-5">
+                    <input type="text" id="uName" class="input-premium" placeholder="اسم المسؤول">
+                    <input type="text" class="input-premium" placeholder="اسم الشركة / المؤسسة">
                     
-                    <div class="md:col-span-2">
-                        <label class="text-[10px] text-cyan-400 mb-2 block font-bold">ارفاق السجل التجاري أو شهادة العمل الحر (إلزامي)</label>
-                        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                            <p class="text-xs text-slate-400" id="fileStatus">اسحب الملف هنا أو اضغط للرفع (PDF, PNG, JPG)</p>
-                            <input type="file" id="fileInput" class="hidden" accept=".pdf, image/*" onchange="handleFile(this)">
-                        </div>
+                    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                        <p id="fileStatus" class="text-xs text-slate-400">إرفاق السجل التجاري أو شهادة العمل الحر (PDF/Image)</p>
+                        <input type="file" id="fileInput" class="hidden" onchange="document.getElementById('fileStatus').innerText = 'تم رفع الملف بنجاح'">
                     </div>
 
-                    <div><label class="text-[10px] text-slate-500 mb-1 block">البريد الإلكتروني</label><input type="email" id="uEmail" class="input-premium" placeholder="email@domain.com"></div>
-                    <div><label class="text-[10px] text-slate-500 mb-1 block">رقم الجوال</label><input type="tel" id="uPhone" class="input-premium" placeholder="05xxxxxxxx"></div>
+                    <input type="email" class="input-premium" placeholder="البريد الإلكتروني الرسمي">
+                    <input type="tel" class="input-premium" placeholder="رقم جوال المسؤول">
+                    <input type="password" class="input-premium" placeholder="كلمة المرور">
+                    
+                    <button onclick="finalize()" class="w-full btn-cyan py-5 mt-4 text-lg">تفعيل الملف والاشتراك</button>
                 </div>
-                
-                <button onclick="finalizeAuth()" class="w-full btn-cyan py-4 mt-8 text-lg">تأكيد البيانات والاشتراك</button>
             </div>
         </div>
     </main>
 
     <script>
-        let currentLang = 'ar';
-        let fileLoaded = false;
-
         function showSection(id) {
             ['homeSection', 'authSection'].forEach(s => document.getElementById(s).classList.add('hidden'));
             document.getElementById(id + 'Section').classList.remove('hidden');
+            window.scrollTo(0,0);
         }
-
-        function openReg(plan) { showSection('auth'); }
-
-        function handleFile(input) {
-            if(input.files && input.files[0]) {
-                document.getElementById('fileStatus').innerText = "تم اختيار: " + input.files[0].name;
-                document.getElementById('fileStatus').classList.add('text-cyan-400');
-                fileLoaded = true;
-            }
-        }
-
-        function finalizeAuth() {
-            const name = document.getElementById('uName').value;
-            if(!name) { alert("يرجى إدخال الاسم"); return; }
-            if(!fileLoaded) { alert("يرجى إرفاق السجل التجاري أو شهادة العمل الحر لإكمال التسجيل"); return; }
-            
-            document.getElementById('userNameNav').innerText = name;
-            document.getElementById('guestActions').classList.add('hidden');
-            document.getElementById('navUser').classList.remove('hidden');
+        function openReg() { showSection('auth'); }
+        function finalize() {
+            alert("تم استلام وثائقك بنجاح. سنقوم بمراجعتها وتفعيل حسابك خلال 24 ساعة.");
             showSection('home');
-            alert("تم استلام طلبك والوثائق بنجاح. سيتم مراجعة الملف وتفعيل حسابك.");
-        }
-
-        function toggleLang() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'EN' : 'AR';
-            document.querySelectorAll('.data-lang').forEach(el => el.innerText = el.getAttribute(`data-${currentLang}`));
-            document.querySelectorAll('.data-lang-ph').forEach(el => el.placeholder = el.getAttribute(`data-${currentLang}-ph`));
         }
     </script>
 </body>
