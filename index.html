@@ -3,131 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMINA | منصة الأتمتة المالية</title>
+    <title>LUMINA | النظام المالي المتكامل</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        :root { --accent: #00e5ff; --bg: #010409; }
-        body { background-color: var(--bg); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
-        .glass-card { background: rgba(22, 27, 34, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; transition: 0.3s; }
-        .glass-card:hover { border-color: var(--accent); shadow: 0 0 20px rgba(0, 229, 255, 0.1); }
-        .btn-gradient { background: linear-gradient(135deg, #00e5ff, #2979ff); color: #000; font-weight: 800; border-radius: 12px; }
-        .input-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 12px; width: 100%; outline: none; }
-        .input-box:focus { border-color: var(--accent); }
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .otp-slot { width: 50px; height: 60px; text-align: center; font-size: 24px; font-weight: bold; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 10px; color: var(--accent); }
-        #toast { position: fixed; top: 20px; right: 20px; background: var(--accent); color: #000; padding: 15px 25px; border-radius: 12px; font-weight: bold; z-index: 2000; display: none; animation: slideIn 0.5s forwards; }
-        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+        body { background-color: #010409; color: #e6edf3; font-family: 'Cairo', sans-serif; }
+        .glass { background: rgba(22, 27, 34, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; }
+        .btn-main { background: linear-gradient(135deg, #00e5ff, #2979ff); color: #000; font-weight: 800; border-radius: 10px; transition: 0.3s; }
+        .btn-main:hover { opacity: 0.9; transform: scale(1.02); }
+        .input-field { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 12px; width: 100%; color: white; outline: none; }
+        .input-field:focus { border-color: #00e5ff; box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2); }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .otp-input { width: 45px; height: 55px; text-align: center; font-size: 20px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; color: #00e5ff; font-weight: bold; }
+        #toast { position: fixed; top: 20px; right: 20px; background: #00e5ff; color: #000; padding: 12px 24px; border-radius: 8px; font-weight: bold; z-index: 2000; display: none; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div id="toast">تم إرسال الرمز لبريدك الإلكتروني 📧</div>
+    <div id="toast">تم إرسال الرمز للبريد الإلكتروني 📧</div>
 
-    <nav class="p-5 border-b border-white/5 flex justify-between items-center sticky top-0 bg-black/50 backdrop-blur-md z-50">
+    <nav class="p-4 border-b border-white/5 flex justify-between items-center bg-black/50 sticky top-0 z-50">
         <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-cyan-400 rounded-lg flex items-center justify-center text-black font-black">L</div>
-            <span class="text-xl font-black tracking-tighter">LUMINA</span>
+            <span class="text-2xl font-black text-cyan-400">LUMINA</span>
         </div>
-        <button onclick="toggleLang()" class="text-xs font-bold border border-white/20 px-4 py-2 rounded-lg">English</button>
+        <button onclick="alert('English is coming soon')" class="text-xs border border-white/20 px-3 py-1 rounded">English</button>
     </nav>
 
-    <header class="text-center py-16 px-6">
-        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">أتمتة مالية <br><span class="text-cyan-400">بثقة الخبراء</span></h1>
-        <p class="text-slate-400 max-w-2xl mx-auto">نظام متكامل لإدارة الفواتير والربط الضريبي، مصمم خصيصاً لتلبية احتياجاتك.</p>
-    </header>
-
-    <section class="max-w-7xl mx-auto px-6 pb-24">
-        <h2 class="text-cyan-400 font-bold mb-8 flex items-center gap-2"><span>|</span> باقاتنا المتاحة</h2>
+    <div class="max-w-7xl mx-auto py-12 px-6">
+        <h1 class="text-3xl font-black text-center mb-10">باقات لومينا <span class="text-cyan-400">العشر</span></h1>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            
             <script>
                 const plans = [
-                    {n: "الأساسية", p: "150", d: "إصدار 50 فاتورة ضريبية"},
-                    {n: "النمو", p: "450", d: "دعم فني عبر التطبيق"},
-                    {n: "المتقدمة", p: "900", d: "المعتمد ZATCA باركود"},
-                    {n: "الاحترافية", p: "1,500", d: "إدارة المخزون والموردين"},
-                    {n: "الأتمتة 10", p: "2,500", d: "ربط API لـ 10 فروع"},
-                    {n: "الأتمتة 30", p: "4,500", d: "أتمتة القيود المحاسبية"},
-                    {n: "الأتمتة 100", p: "6,000", d: "تحليلات مالية متقدمة"},
-                    {n: "الربط البنكي", p: "8,500", d: "تزامن مباشر مع البنوك"},
-                    {n: "المؤسسات", p: "12,000", d: "حلول مخصصة بالكامل"},
-                    {n: "باقة VIP", p: "15,000", d: "مدير حساب مخصص 24/7"}
+                    {n: "الأساسية", p: "150", d: "50 فاتورة/شهر"},
+                    {n: "النمو", p: "450", d: "دعم فني متواصل"},
+                    {n: "المتقدمة", p: "900", d: "ربط ضريبي ZATCA"},
+                    {n: "الاحترافية", p: "1,500", d: "تقارير مالية دقيقة"},
+                    {n: "الأتمتة 10", p: "2,500", d: "ربط 10 فروع"},
+                    {n: "الأتمتة 30", p: "4,500", d: "أتمتة القيود يومياً"},
+                    {n: "الأتمتة 100", p: "6,000", d: "سعة غير محدودة"},
+                    {n: "الربط البنكي", p: "8,500", d: "تزامن مع البنوك"},
+                    {n: "المؤسسات", p: "12,000", d: "تطوير مخصص"},
+                    {n: "باقة VIP", p: "15,000", d: "أولوية قصوى 24/7"}
                 ];
-
                 plans.forEach(plan => {
                     document.write(`
-                        <div class="glass-card p-6 flex flex-col justify-between h-full">
+                        <div class="glass p-5 flex flex-col justify-between">
                             <div>
-                                <h3 class="font-bold text-slate-300 mb-1">${plan.n}</h3>
-                                <p class="text-2xl font-black mb-2">${plan.p} <span class="text-[10px] text-slate-500">SAR</span></p>
-                                <p class="text-[10px] text-slate-500 mb-6">• ${plan.d}</p>
+                                <h3 class="text-sm font-bold text-slate-400">${plan.n}</h3>
+                                <p class="text-2xl font-black my-2">${plan.p} <span class="text-[10px]">SAR</span></p>
+                                <p class="text-[10px] text-slate-500 mb-4">• ${plan.d}</p>
                             </div>
-                            <button onclick="openModal('regModal')" class="btn-gradient w-full py-3 text-xs">اشترك الآن</button>
+                            <button onclick="toggleModal('regModal', true)" class="btn-main w-full py-2 text-xs">اشترك الآن</button>
                         </div>
                     `);
                 });
             </script>
         </div>
-    </section>
+    </div>
 
-    <div id="regModal" class="modal-overlay">
-        <div class="glass-card p-8 w-full max-w-lg relative">
-            <button onclick="closeModal('regModal')" class="absolute top-4 left-4 text-slate-500 hover:text-white text-xl">✕</button>
-            <h2 class="text-2xl font-black text-center text-cyan-400 mb-8">إنشاء ملف المنشأة</h2>
+    <div id="regModal" class="modal">
+        <div class="glass p-8 w-full max-w-md relative">
+            <button onclick="toggleModal('regModal', false)" class="absolute top-4 left-4 text-slate-500 hover:text-white">✕</button>
+            <h2 class="text-xl font-black text-center mb-6 text-cyan-400">إنشاء ملف المنشأة</h2>
             <div class="space-y-4">
-                <div><label class="text-[10px] text-slate-500 block mb-1">اسم المسؤول</label><input type="text" id="uName" class="input-box" placeholder="محمد أحمد"></div>
-                <div><label class="text-[10px] text-slate-500 block mb-1">البريد الإلكتروني الرسمي</label><input type="email" id="uEmail" class="input-box" placeholder="cfo@company.com"></div>
-                <div><label class="text-[10px] text-slate-500 block mb-1">رقم الجوال</label><input type="tel" class="input-box" placeholder="+966 5x xxx xxxx"></div>
-                
-                <div class="border-2 border-dashed border-white/10 p-6 rounded-xl text-center">
-                    <p class="text-[10px] text-slate-500 mb-2">ارفاق السجل التجاري / شهادة العمل الحر (PDF/IMG)</p>
-                    <button onclick="document.getElementById('fileIn').click()" class="text-cyan-400 text-xs font-bold underline">اختيار الملف</button>
-                    <input type="file" id="fileIn" class="hidden">
+                <input type="text" id="name" class="input-field" placeholder="اسم المسؤول">
+                <input type="email" id="email" class="input-field" placeholder="البريد الإلكتروني الرسمي">
+                <input type="tel" class="input-field" placeholder="+966 5xxxxxxxx">
+                <div class="border-2 border-dashed border-white/10 p-4 rounded-lg text-center">
+                    <p class="text-[10px] text-slate-500 mb-2">ارفق السجل التجاري (إلزامي)</p>
+                    <input type="file" id="file" class="hidden" onchange="this.previousElementSibling.innerText='تم اختيار الملف ✅'">
+                    <button onclick="document.getElementById('file').click()" class="text-cyan-400 text-[10px] underline">اختيار الملف</button>
                 </div>
-                
-                <button onclick="sendOTP()" class="btn-gradient w-full py-4 text-lg mt-4">إرسال رمز التحقق</button>
+                <button onclick="sendOTP()" class="btn-main w-full py-3">إرسال رمز التحقق</button>
             </div>
         </div>
     </div>
 
-    <div id="otpModal" class="modal-overlay">
-        <div class="glass-card p-10 w-full max-w-sm text-center relative">
-            <button onclick="closeModal('otpModal'); openModal('regModal')" class="absolute top-4 right-4 text-slate-500 hover:text-white">←</button>
-            <h2 class="text-xl font-black text-cyan-400 mb-2">تأكيد الهوية</h2>
-            <p class="text-[10px] text-slate-500 mb-8">أدخل الرمز المكون من 4 أرقام المرسل لبريدك الإلكتروني</p>
-            <div class="flex justify-center gap-3 mb-10" dir="ltr">
-                <input type="text" maxlength="1" class="otp-slot">
-                <input type="text" maxlength="1" class="otp-slot">
-                <input type="text" maxlength="1" class="otp-slot">
-                <input type="text" maxlength="1" class="otp-slot">
+    <div id="otpModal" class="modal">
+        <div class="glass p-8 w-full max-w-sm text-center relative">
+            <button onclick="toggleModal('otpModal', false); toggleModal('regModal', true)" class="absolute top-4 right-4 text-slate-500 hover:text-white">←</button>
+            <h2 class="text-xl font-black mb-2">تأكيد الرمز</h2>
+            <p class="text-[10px] text-slate-500 mb-6">أدخل الرمز المكون من 4 أرقام المرسل لبريدك</p>
+            <div class="flex justify-center gap-2 mb-8" dir="ltr">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
             </div>
-            <button onclick="location.reload()" class="btn-gradient w-full py-3">تحقق ومتابعة</button>
+            <button onclick="location.reload()" class="btn-main w-full py-3">تحقق ومتابعة</button>
         </div>
     </div>
 
     <script>
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        
-        function sendOTP() {
-            const email = document.getElementById('uEmail').value;
-            if(!email) { alert("يرجى إدخال البريد الإلكتروني"); return; }
-            
-            const toast = document.getElementById('toast');
-            toast.innerText = `تم إرسال الرمز إلى ${email} 📧`;
-            toast.style.display = 'block';
-            
-            setTimeout(() => {
-                toast.style.display = 'none';
-                closeModal('regModal');
-                openModal('otpModal');
-            }, 1500);
+        function toggleModal(id, show) {
+            document.getElementById(id).style.display = show ? 'flex' : 'none';
         }
 
-        function toggleLang() {
-            const alertMsg = "اللغة الإنجليزية ستكون متاحة بالكامل في النسخة القادمة";
-            alert(alertMsg);
+        function sendOTP() {
+            const email = document.getElementById('email').value;
+            if(!email) { alert('أدخل البريد أولاً'); return; }
+            
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+                toggleModal('regModal', false);
+                toggleModal('otpModal', true);
+            }, 1500);
         }
     </script>
 </body>
