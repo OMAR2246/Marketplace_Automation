@@ -3,112 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMINA | النظام المالي المتكامل</title>
+    <title>LUMINA Enterprise</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
-        body { background-color: #010409; color: #e6edf3; font-family: 'Cairo', sans-serif; }
-        .glass { background: rgba(22, 27, 34, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; }
-        .btn-main { background: linear-gradient(135deg, #00e5ff, #2979ff); color: #000; font-weight: 800; border-radius: 10px; transition: 0.3s; }
-        .btn-main:hover { opacity: 0.9; transform: scale(1.02); }
-        .input-field { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 12px; width: 100%; color: white; outline: none; }
-        .input-field:focus { border-color: #00e5ff; box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2); }
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .otp-input { width: 45px; height: 55px; text-align: center; font-size: 20px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; color: #00e5ff; font-weight: bold; }
-        #toast { position: fixed; top: 20px; right: 20px; background: #00e5ff; color: #000; padding: 12px 24px; border-radius: 8px; font-weight: bold; z-index: 2000; display: none; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap');
+        :root { --accent: #00e5ff; --bg-dark: #0a0c10; --card-bg: #161b22; }
+        body { background-color: var(--bg-dark); color: #f0f6fc; font-family: 'Cairo', sans-serif; }
+        
+        /* تأثير الزجاج الفاخر */
+        .glass-card { background: rgba(22, 27, 34, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1); }
+        
+        /* الأزرار الاحترافية */
+        .btn-premium { background: linear-gradient(135deg, #00e5ff 0%, #2979ff 100%); color: #050505; font-weight: 800; border-radius: 14px; transition: 0.3s; position: relative; overflow: hidden; }
+        .btn-premium:hover { box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); opacity: 0.9; }
+        
+        /* الحقول */
+        .input-premium { background: #0d1117; border: 1.5px solid #30363d; color: white; border-radius: 12px; padding: 14px; width: 100%; transition: 0.3s; }
+        .input-premium:focus { border-color: var(--accent); outline: none; background: #121d2f; }
+
+        /* الأنظمة المنبثقة */
+        .modal-container { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+        .modal-active { display: flex; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
 
-    <div id="toast">تم إرسال الرمز للبريد الإلكتروني 📧</div>
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[2000] hidden bg-cyan-400 text-black px-6 py-3 rounded-full font-bold shadow-2xl"></div>
 
-    <nav class="p-4 border-b border-white/5 flex justify-between items-center bg-black/50 sticky top-0 z-50">
+    <nav class="sticky top-0 z-50 px-6 py-4 border-b border-white/5 bg-black/40 backdrop-blur-lg flex justify-between items-center">
         <div class="flex items-center gap-2">
-            <span class="text-2xl font-black text-cyan-400">LUMINA</span>
+            <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                <span class="text-black font-black text-xl">L</span>
+            </div>
+            <span class="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">LUMINA</span>
         </div>
-        <button onclick="alert('English is coming soon')" class="text-xs border border-white/20 px-3 py-1 rounded">English</button>
+        <button class="text-xs font-bold px-4 py-2 border border-white/10 rounded-full hover:bg-white/5 transition">English</button>
     </nav>
 
-    <div class="max-w-7xl mx-auto py-12 px-6">
-        <h1 class="text-3xl font-black text-center mb-10">باقات لومينا <span class="text-cyan-400">العشر</span></h1>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <header class="text-center py-20 px-6">
+        <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">باقات لومينا <br><span class="text-cyan-400">المتكاملة</span></h1>
+        <p class="text-slate-400 max-w-2xl mx-auto text-lg">اختر الباقة التي تناسب حجم أعمالك وابدأ رحلة الأتمتة المالية اليوم.</p>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 pb-32">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             <script>
                 const plans = [
-                    {n: "الأساسية", p: "150", d: "50 فاتورة/شهر"},
-                    {n: "النمو", p: "450", d: "دعم فني متواصل"},
-                    {n: "المتقدمة", p: "900", d: "ربط ضريبي ZATCA"},
-                    {n: "الاحترافية", p: "1,500", d: "تقارير مالية دقيقة"},
-                    {n: "الأتمتة 10", p: "2,500", d: "ربط 10 فروع"},
-                    {n: "الأتمتة 30", p: "4,500", d: "أتمتة القيود يومياً"},
-                    {n: "الأتمتة 100", p: "6,000", d: "سعة غير محدودة"},
-                    {n: "الربط البنكي", p: "8,500", d: "تزامن مع البنوك"},
-                    {n: "المؤسسات", p: "12,000", d: "تطوير مخصص"},
-                    {n: "باقة VIP", p: "15,000", d: "أولوية قصوى 24/7"}
+                    {n: "الأساسية", p: "150", d: "50 فاتورة ضريبية / شهر"},
+                    {n: "النمو", p: "450", d: "دعم فني مخصص 24/7"},
+                    {n: "المتقدمة", p: "900", d: "ربط ضريبي مباشر ZATCA"},
+                    {n: "الاحترافية", p: "1,500", d: "إدارة المخزون والموردين"},
+                    {n: "الأتمتة 10", p: "2,500", d: "ربط API لـ 10 فروع"},
+                    {n: "الأتمتة 30", p: "4,500", d: "أتمتة القيود المحاسبية"},
+                    {n: "الأتمتة 100", p: "6,000", d: "تقارير ذكاء أعمال BI"},
+                    {n: "الربط البنكي", p: "8,500", d: "تزامن حي مع الحسابات"},
+                    {n: "المؤسسات", p: "12,000", d: "تخصيص كامل للنظام"},
+                    {n: "باقة VIP", p: "15,000", d: "مدير حساب تنفيذي مخصص"}
                 ];
                 plans.forEach(plan => {
                     document.write(`
-                        <div class="glass p-5 flex flex-col justify-between">
+                        <div class="glass-card p-8 flex flex-col justify-between">
                             <div>
-                                <h3 class="text-sm font-bold text-slate-400">${plan.n}</h3>
-                                <p class="text-2xl font-black my-2">${plan.p} <span class="text-[10px]">SAR</span></p>
-                                <p class="text-[10px] text-slate-500 mb-4">• ${plan.d}</p>
+                                <span class="text-[10px] uppercase tracking-widest text-cyan-500 font-bold">باقة</span>
+                                <h3 class="text-xl font-bold mt-1 mb-4">${plan.n}</h3>
+                                <div class="flex items-baseline gap-1 mb-4">
+                                    <span class="text-3xl font-black">${plan.p}</span>
+                                    <span class="text-xs text-slate-500 font-bold uppercase">SAR</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mb-8 leading-relaxed">✔️ ${plan.d}</p>
                             </div>
-                            <button onclick="toggleModal('regModal', true)" class="btn-main w-full py-2 text-xs">اشترك الآن</button>
+                            <button onclick="toggleModal('regModal', true)" class="btn-premium w-full py-3 text-sm uppercase">اشترك الآن</button>
                         </div>
                     `);
                 });
             </script>
         </div>
-    </div>
+    </section>
 
-    <div id="regModal" class="modal">
-        <div class="glass p-8 w-full max-w-md relative">
-            <button onclick="toggleModal('regModal', false)" class="absolute top-4 left-4 text-slate-500 hover:text-white">✕</button>
-            <h2 class="text-xl font-black text-center mb-6 text-cyan-400">إنشاء ملف المنشأة</h2>
-            <div class="space-y-4">
-                <input type="text" id="name" class="input-field" placeholder="اسم المسؤول">
-                <input type="email" id="email" class="input-field" placeholder="البريد الإلكتروني الرسمي">
-                <input type="tel" class="input-field" placeholder="+966 5xxxxxxxx">
-                <div class="border-2 border-dashed border-white/10 p-4 rounded-lg text-center">
-                    <p class="text-[10px] text-slate-500 mb-2">ارفق السجل التجاري (إلزامي)</p>
-                    <input type="file" id="file" class="hidden" onchange="this.previousElementSibling.innerText='تم اختيار الملف ✅'">
-                    <button onclick="document.getElementById('file').click()" class="text-cyan-400 text-[10px] underline">اختيار الملف</button>
+    <div id="regModal" class="modal-container">
+        <div class="glass-card p-10 w-full max-w-xl relative shadow-2xl">
+            <button onclick="toggleModal('regModal', false)" class="absolute top-6 left-6 text-slate-500 hover:text-white text-2xl transition">✕</button>
+            
+            <h2 class="text-3xl font-black text-center mb-2 text-white">إنشاء ملف المنشأة</h2>
+            <p class="text-center text-slate-500 text-sm mb-10">يرجى تزويدنا بالبيانات الأساسية لبدء التفعيل</p>
+            
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-400 px-1">اسم المسؤول</label>
+                        <input type="text" id="uName" class="input-premium" placeholder="مثال: محمد أحمد">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-400 px-1">اسم المنشأة</label>
+                        <input type="text" class="input-premium" placeholder="شركة الحلول المتكاملة">
+                    </div>
                 </div>
-                <button onclick="sendOTP()" class="btn-main w-full py-3">إرسال رمز التحقق</button>
+                
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-400 px-1">البريد الإلكتروني الرسمي</label>
+                    <input type="email" id="uEmail" class="input-premium" placeholder="cfo@company.com">
+                </div>
+
+                <div class="border-2 border-dashed border-white/10 p-8 rounded-2xl text-center bg-white/5 hover:bg-white/10 transition cursor-pointer" onclick="document.getElementById('fileIn').click()">
+                    <div class="text-cyan-400 text-3xl mb-2">📄</div>
+                    <p id="fileName" class="text-sm font-bold">ارفاق السجل التجاري (PDF/IMG)</p>
+                    <p class="text-[10px] text-slate-500 mt-1">هذا الملف مطلوب للتحقق من الهوية القانونية</p>
+                    <input type="file" id="fileIn" class="hidden" onchange="document.getElementById('fileName').innerText='تم اختيار الملف بنجاح ✅'">
+                </div>
+                
+                <button onclick="handleOTP()" class="btn-premium w-full py-4 text-lg">تفعيل الملف والاستمرار</button>
             </div>
         </div>
     </div>
 
-    <div id="otpModal" class="modal">
-        <div class="glass p-8 w-full max-w-sm text-center relative">
-            <button onclick="toggleModal('otpModal', false); toggleModal('regModal', true)" class="absolute top-4 right-4 text-slate-500 hover:text-white">←</button>
-            <h2 class="text-xl font-black mb-2">تأكيد الرمز</h2>
-            <p class="text-[10px] text-slate-500 mb-6">أدخل الرمز المكون من 4 أرقام المرسل لبريدك</p>
-            <div class="flex justify-center gap-2 mb-8" dir="ltr">
-                <input type="text" maxlength="1" class="otp-input">
-                <input type="text" maxlength="1" class="otp-input">
-                <input type="text" maxlength="1" class="otp-input">
-                <input type="text" maxlength="1" class="otp-input">
+    <div id="otpModal" class="modal-container">
+        <div class="glass-card p-12 w-full max-w-md text-center relative">
+            <button onclick="toggleModal('otpModal', false); toggleModal('regModal', true)" class="absolute top-6 right-6 text-slate-500 hover:text-white text-2xl transition">←</button>
+            
+            <div class="w-20 h-20 bg-cyan-400/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-4xl">📧</span>
             </div>
-            <button onclick="location.reload()" class="btn-main w-full py-3">تحقق ومتابعة</button>
+            <h2 class="text-2xl font-black mb-2">تحقق من بريدك</h2>
+            <p class="text-sm text-slate-500 mb-10 leading-relaxed">أدخل الرمز المكون من 4 أرقام الذي أرسلناه إلى بريدك الإلكتروني</p>
+            
+            <div class="flex justify-center gap-3 mb-10" dir="ltr">
+                <input type="text" maxlength="1" class="otp-input w-14 h-16 text-center text-2xl font-black bg-white/5 border border-white/10 rounded-xl focus:border-cyan-400 outline-none">
+                <input type="text" maxlength="1" class="otp-input w-14 h-16 text-center text-2xl font-black bg-white/5 border border-white/10 rounded-xl focus:border-cyan-400 outline-none">
+                <input type="text" maxlength="1" class="otp-input w-14 h-16 text-center text-2xl font-black bg-white/5 border border-white/10 rounded-xl focus:border-cyan-400 outline-none">
+                <input type="text" maxlength="1" class="otp-input w-14 h-16 text-center text-2xl font-black bg-white/5 border border-white/10 rounded-xl focus:border-cyan-400 outline-none">
+            </div>
+            
+            <button onclick="alert('تم التفعيل بنجاح!')" class="btn-premium w-full py-4">تأكيد الرمز</button>
+            <p class="mt-6 text-xs text-slate-500">لم يصلك الرمز؟ <span class="text-cyan-400 cursor-pointer">إعادة الإرسال</span></p>
         </div>
     </div>
 
     <script>
-        function toggleModal(id, show) {
-            document.getElementById(id).style.display = show ? 'flex' : 'none';
+        function toggleModal(id, state) {
+            const modal = document.getElementById(id);
+            state ? modal.classList.add('modal-active') : modal.classList.remove('modal-active');
         }
 
-        function sendOTP() {
-            const email = document.getElementById('email').value;
-            if(!email) { alert('أدخل البريد أولاً'); return; }
+        function handleOTP() {
+            const email = document.getElementById('uEmail').value;
+            if(!email) { alert("يرجى إدخال البريد الإلكتروني أولاً"); return; }
             
             const toast = document.getElementById('toast');
-            toast.style.display = 'block';
+            toast.innerText = `تم إرسال الرمز إلى ${email} 📧`;
+            toast.classList.remove('hidden');
+            
             setTimeout(() => {
-                toast.style.display = 'none';
+                toast.classList.add('hidden');
                 toggleModal('regModal', false);
                 toggleModal('otpModal', true);
             }, 1500);
