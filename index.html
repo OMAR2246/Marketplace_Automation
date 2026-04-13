@@ -3,134 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة أتمتة المؤسسات | الحل المتكامل</title>
+    <title>Enterprise OS | Universal Accounting Bridge</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        body { background-color: #030712; color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
-        .gradient-text { background: linear-gradient(135deg, #fff 30%, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .service-card { transition: all 0.4s ease; }
-        .service-card:hover { transform: translateY(-10px); background: rgba(59, 130, 246, 0.05); }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Inter:wght@400;700;900&display=swap');
+        :root { --primary: #3b82f6; --bg: #020617; }
+        body { background-color: var(--bg); color: white; transition: all 0.5s ease; }
+        .font-ar { font-family: 'Cairo', sans-serif; }
+        .font-en { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.07); }
+        .gradient-text { background: linear-gradient(135deg, #fff 40%, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .dashboard-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .dashboard-card:hover { background: rgba(59, 130, 246, 0.08); border-color: var(--primary); transform: translateY(-5px); }
+        .hidden { display: none; }
+        .otp-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
     </style>
 </head>
-<body>
+<body class="font-ar">
 
-    <div id="marketingPage">
-        <nav class="fixed top-0 w-full z-50 glass p-4">
-            <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="text-xl font-black gradient-text">ENTERPRISE OS</div>
-                <button onclick="showLogin()" class="bg-blue-600 px-6 py-2 rounded-full font-bold text-sm">تسجيل الدخول</button>
+    <nav class="fixed top-0 w-full z-50 glass p-5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-black gradient-text tracking-tighter">ENTERPRISE OS</div>
+            <div class="flex gap-4 items-center">
+                <button onclick="toggleLanguage()" id="langBtn" class="text-xs font-bold border border-white/10 px-4 py-1.5 rounded-full hover:bg-white/5 transition">English</button>
+                <button onclick="showLogin()" class="bg-blue-600 px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-blue-500/20" data-en="Login" data-ar="دخول المنصة">دخول المنصة</button>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 gradient-text load-hidden">أتمتة ذكية لمؤسستك</h1>
-            <p class="text-slate-400 max-w-2xl mb-10 load-hidden">نظام متكامل يربط عملياتك المالية بأنظمة SAP ورواء، ويوثق مورديك بذكاء اصطناعي.</p>
-            <div class="flex gap-4 load-hidden">
-                <button onclick="showLogin()" class="bg-blue-600 px-10 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition">ابدأ الآن - 1600 ر.س</button>
-            </div>
+    <main id="marketingPage" class="pt-32">
+        <section class="min-h-[70vh] flex flex-col items-center justify-center text-center px-6">
+            <div class="inline-block px-4 py-1 mb-6 rounded-full glass border-blue-500/30 text-blue-400 text-xs font-bold load-hidden" data-ar="أتمتة محاسبية بلا حدود" data-en="Unlimited Accounting Automation">أتمتة محاسبية بلا حدود</div>
+            <h1 class="text-5xl md:text-8xl font-black mb-8 gradient-text load-hidden leading-tight" 
+                data-ar="اربط مؤسستك بأي نظام محاسبي في العالم" data-en="Bridge Your Business to Any ERP System">اربط مؤسستك بأي نظام محاسبي في العالم</h1>
+            <p class="text-slate-400 max-w-3xl mb-12 load-hidden text-lg md:text-xl leading-relaxed"
+               data-ar="أتمتة كاملة لتدفقاتك المالية؛ من استلام الفاتورة وحتى ترحيلها في SAP، Oracle، رواء، قيود، أو أي برنامج محاسبي تختاره."
+               data-en="Complete automation of your financial flows; from receiving the invoice to posting it in SAP, Oracle, Rawaa, Qoyod, or any software you choose.">
+               أتمتة كاملة لتدفقاتك المالية؛ من استلام الفاتورة وحتى ترحيلها في SAP، Oracle، رواء، قيود، أو أي برنامج محاسبي تختاره.
+            </p>
+            <button onclick="showLogin()" class="bg-white text-black px-12 py-5 rounded-2xl font-black text-xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105"
+                    data-ar="ابدأ الأتمتة الآن" data-en="Start Automating Now">ابدأ الأتمتة الآن</button>
         </section>
 
-        <section class="py-20 max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-            <div class="glass p-8 rounded-3xl service-card">
-                <div class="text-3xl mb-4">🔄</div>
-                <h3 class="font-bold text-xl mb-2">ربط SAP & رواء</h3>
-                <p class="text-slate-400 text-sm">سحب بيانات الفواتير (رقم، تاريخ، ضريبة) وتغذيتها في نظامك آلياً.</p>
-            </div>
-            <div class="glass p-8 rounded-3xl service-card">
-                <div class="text-3xl mb-4">💰</div>
-                <h3 class="font-bold text-xl mb-2">الأتمتة المالية</h3>
-                <p class="text-slate-400 text-sm">خصم عمولة 10% فورياً قبل تحويل المبالغ للمستفيدين.</p>
-            </div>
-            <div class="glass p-8 rounded-3xl service-card">
-                <div class="text-3xl mb-4">🛡️</div>
-                <h3 class="font-bold text-xl mb-2">الفحص الذكي</h3>
-                <p class="text-slate-400 text-sm">مطابقة الفواتير مع شروط هيئة الزكاة والضريبة والجمارك آلياً.</p>
-            </div>
-            <div class="glass p-8 rounded-3xl service-card">
-                <div class="text-3xl mb-4">📜</div>
-                <h3 class="font-bold text-xl mb-2">توثيق الموردين</h3>
-                <p class="text-slate-400 text-sm">نظام فحص السجلات التجارية ووثائق العمل الحر.</p>
-            </div>
-            <div class="glass p-8 rounded-3xl service-card">
-                <div class="text-3xl mb-4">📊</div>
-                <h3 class="font-bold text-xl mb-2">تقارير الـ PO</h3>
-                <p class="text-slate-400 text-sm">تتبع أوامر الشراء ومطابقتها مع المبالغ المصروفة.</p>
-            </div>
-            <div class="glass p-8 rounded-3xl service-card">
-                <div class="text-3xl mb-4">🚀</div>
-                <h3 class="font-bold text-xl mb-2">دعم فني 24/7</h3>
-                <p class="text-slate-400 text-sm">مرافقة تقنية لضمان عمل الأتمتة دون انقطاع.</p>
-            </div>
-        </section>
-    </div>
-
-    <div id="loginModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
-        <div class="glass w-full max-w-md p-8 rounded-3xl relative">
-            <button onclick="hideLogin()" class="absolute top-4 left-4 text-slate-500">✕</button>
-            <h2 class="text-2xl font-bold mb-6 text-center">تسجيل بيانات المنشأة</h2>
-            <form onsubmit="doLogin(event)" class="space-y-4">
-                <input type="text" placeholder="اسم الجهة" required class="w-full p-4 rounded-xl bg-slate-900 border border-slate-800 outline-none focus:border-blue-500">
-                <input type="tel" placeholder="رقم الهاتف" required class="w-full p-4 rounded-xl bg-slate-900 border border-slate-800 outline-none focus:border-blue-500">
-                <div class="border-2 border-dashed border-slate-800 p-4 rounded-xl text-center">
-                    <p class="text-xs text-slate-500 mb-2 font-bold">إرفاق السجل أو وثيقة العمل الحر</p>
-                    <input type="file" required class="text-xs text-blue-400">
+        <section class="py-24 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+            <div class="glass p-6 rounded-[2.5rem] load-hidden">
+                <div class="aspect-video bg-slate-900/50 rounded-3xl flex items-center justify-center border border-white/5 mb-6 group cursor-pointer overflow-hidden">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition">▶</div>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 p-4 rounded-xl font-bold hover:bg-blue-700 transition">إتمام التسجيل والدخول</button>
-            </form>
+                <h3 class="font-bold text-2xl mb-3" data-ar="الربط الشامل (ERP Bridge)" data-en="Universal ERP Bridge">الربط الشامل (ERP Bridge)</h3>
+                <p class="text-slate-400 leading-relaxed" data-ar="شاهد كيف يتخاطب نظامنا مع البرامج المحاسبية المختلفة لسحب بيانات أوامر الشراء (PO) والفواتير لحظياً." data-en="Watch how our system communicates with different accounting software to pull PO and invoice data instantly.">شاهد كيف يتخاطب نظامنا مع البرامج المحاسبية المختلفة لسحب بيانات أوامر الشراء (PO) والفواتير لحظياً.</p>
+            </div>
+            <div class="glass p-6 rounded-[2.5rem] load-hidden">
+                <div class="aspect-video bg-slate-900/50 rounded-3xl flex items-center justify-center border border-white/5 mb-6 group cursor-pointer overflow-hidden">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center group-hover:scale-110 transition">▶</div>
+                </div>
+                <h3 class="font-bold text-2xl mb-3" data-ar="التحقق الضريبي الآلي" data-en="Automated Tax Verification">التحقق الضريبي الآلي</h3>
+                <p class="text-slate-400 leading-relaxed" data-ar="تعرف على تقنية الفحص التي تضمن مطابقة كل فاتورة لمتطلبات هيئة الزكاة والضريبة قبل اعتمادها محاسبياً." data-en="Learn about the scanning technology that ensures every invoice matches ZATCA requirements before accounting approval.">تعرف على تقنية الفحص التي تضمن مطابقة كل فاتورة لمتطلبات هيئة الزكاة والضريبة قبل اعتمادها محاسبياً.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="loginModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-6 bg-black/95 backdrop-blur-xl">
+        <div class="glass w-full max-w-lg p-10 rounded-[3rem] relative border border-white/10 shadow-2xl">
+            <button onclick="hideLogin()" class="absolute top-8 left-8 text-slate-500 hover:text-white transition text-xl">✕</button>
+            
+            <div id="registrationForm">
+                <h2 class="text-4xl font-black mb-3 text-center" data-ar="تسجيل المنشأة" data-en="Entity Registration">تسجيل المنشأة</h2>
+                <p class="text-center text-slate-500 mb-10" data-ar="خطوة واحدة نحو الأتمتة الكاملة" data-en="One step towards full automation">خطوة واحدة نحو الأتمتة الكاملة</p>
+                <form onsubmit="handleRequestOTP(event)" class="space-y-5">
+                    <input type="text" id="entityName" placeholder="اسم الجهة / Company Name" required class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 outline-none focus:border-blue-500 transition-all text-lg">
+                    <input type="tel" id="userPhone" placeholder="رقم الجوال / Phone (05xxxxxxxx)" required class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 outline-none focus:border-blue-500 transition-all text-lg text-left">
+                    <div class="p-6 border-2 border-dashed border-white/10 rounded-2xl text-center hover:bg-white/5 transition cursor-pointer relative">
+                        <p class="text-sm text-slate-400 mb-2 font-bold" data-ar="إرفاق السجل التجاري / وثيقة العمل الحر" data-en="Attach Commercial Register / Freelance Doc">إرفاق السجل التجاري / وثيقة العمل الحر</p>
+                        <input type="file" required class="absolute inset-0 opacity-0 cursor-pointer">
+                        <span class="text-xs text-blue-500">PDF, JPG, PNG (Max 5MB)</span>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 p-5 rounded-2xl font-black text-lg hover:bg-blue-700 transition shadow-xl shadow-blue-500/20" data-ar="إرسال رمز التحقق" data-en="Send Verification Code">إرسال رمز التحقق</button>
+                </form>
+            </div>
+
+            <div id="otpForm" class="hidden text-center">
+                <h2 class="text-4xl font-black mb-3" data-ar="رمز التحقق" data-en="OTP Verification">رمز التحقق</h2>
+                <p class="text-slate-500 mb-10" data-ar="أدخل الكود المرسل لجوالك" data-en="Enter the 4-digit code sent to your phone">أدخل الكود المرسل لجوالك</p>
+                <div class="flex justify-center gap-4 mb-10" dir="ltr">
+                    <input type="text" maxlength="1" class="otp-input w-14 h-20 bg-white/5 border border-white/10 rounded-2xl text-center text-3xl font-black outline-none transition-all">
+                    <input type="text" maxlength="1" class="otp-input w-14 h-20 bg-white/5 border border-white/10 rounded-2xl text-center text-3xl font-black outline-none transition-all">
+                    <input type="text" maxlength="1" class="otp-input w-14 h-20 bg-white/5 border border-white/10 rounded-2xl text-center text-3xl font-black outline-none transition-all">
+                    <input type="text" maxlength="1" class="otp-input w-14 h-20 bg-white/5 border border-white/10 rounded-2xl text-center text-3xl font-black outline-none transition-all">
+                </div>
+                <button onclick="finalizeLogin()" class="w-full bg-green-600 p-5 rounded-2xl font-black text-lg hover:bg-green-700 transition" data-ar="تأكيد الدخول" data-en="Verify & Access">تأكيد الدخول</button>
+            </div>
         </div>
     </div>
 
-    <div id="dashboard" class="hidden min-h-screen p-6 md:p-12">
-        <div class="max-w-6xl mx-auto">
-            <header class="flex justify-between items-center mb-10 border-b border-white/5 pb-6">
-                <h2 class="text-2xl font-black gradient-text">لوحة التحكم الذكية</h2>
-                <div class="text-left text-xs text-green-500 font-bold">● نظام الأتمتة نشط</div>
-            </header>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass p-8 rounded-3xl border-r-4 border-blue-600">
-                    <h3 class="font-bold mb-4 flex items-center gap-2">🔗 ربط المحاسب (SAP / رواء)</h3>
-                    <p class="text-sm text-slate-400 mb-6 font-bold">جارِ سحب البيانات من الفاتورة INV-001...</p>
-                    <div class="space-y-2 text-xs bg-black/40 p-4 rounded-xl font-mono">
-                        <p>رقم الفاتورة: <span class="text-blue-400">#98765</span></p>
-                        <p>قيمة الضريبة: <span class="text-blue-400">15%</span></p>
-                        <p>رقم الشراء PO: <span class="text-blue-400">7721-A</span></p>
+    <div id="dashboard" class="hidden min-h-screen bg-[#01040a] p-6 md:p-12">
+        <div class="max-w-7xl mx-auto">
+            <header class="flex justify-between items-end mb-16">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest" data-ar="النظام الموحد نشط" data-en="Unified System Active">النظام الموحد نشط</span>
                     </div>
-                    <button onclick="alert('جاري التحقق من مطابقة هيئة الزكاة...')" class="mt-6 w-full py-2 border border-white/10 rounded-lg text-xs hover:bg-white/5">بدء الفحص الضريبي</button>
+                    <h2 class="text-4xl font-black gradient-text" id="welcomeMsg"></h2>
+                </div>
+                <div class="hidden md:flex gap-4">
+                    <div class="glass px-6 py-3 rounded-2xl border-white/5">
+                        <p class="text-[10px] text-slate-500 mb-1 uppercase">Cloud Sync</p>
+                        <p class="text-sm font-bold text-blue-400">Universal API Connected</p>
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 dashboard-card glass p-10 rounded-[3rem]">
+                    <div class="flex justify-between items-center mb-10">
+                        <h3 class="text-2xl font-black flex items-center gap-4">
+                            <span class="p-4 bg-blue-600/10 rounded-2xl text-blue-500 text-2xl">🔄</span>
+                            <span data-ar="محرك الأتمتة المحاسبية الذكي" data-en="Universal Accounting Engine">محرك الأتمتة المحاسبية الذكي</span>
+                        </h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+                        <div class="bg-black/40 p-5 rounded-3xl border border-white/5">
+                            <p class="text-[10px] text-slate-500 mb-2 uppercase" data-ar="تكامل النظام" data-en="Integration">تكامل النظام</p>
+                            <p class="font-bold text-sm text-blue-400">SAP / Oracle / رواء / +100</p>
+                        </div>
+                        <div class="bg-black/40 p-5 rounded-3xl border border-white/5 text-center">
+                            <p class="text-[10px] text-slate-500 mb-2 uppercase" data-ar="الحالة" data-en="Status">الحالة</p>
+                            <span class="px-2 py-1 bg-green-500/20 text-green-500 text-[10px] rounded-lg">Synced</span>
+                        </div>
+                        <div class="bg-black/40 p-5 rounded-3xl border border-white/5">
+                            <p class="text-[10px] text-slate-500 mb-2 uppercase" data-ar="آخر فاتورة" data-en="Last Invoice">آخر فاتورة</p>
+                            <p class="font-bold text-sm">INV-#2209</p>
+                        </div>
+                        <div class="bg-black/40 p-5 rounded-3xl border border-white/5">
+                            <p class="text-[10px] text-slate-500 mb-2 uppercase" data-ar="الضريبة" data-en="VAT Rate">الضريبة</p>
+                            <p class="font-bold text-sm text-green-400">15.00%</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-600/5 p-6 rounded-3xl border border-blue-500/10 mb-8">
+                        <p class="text-sm text-slate-300 leading-relaxed" data-ar="يقوم النظام حالياً بمراقبة صندوق بريد المحاسبة، واستخراج بيانات الفواتير لحظياً لمطابقتها مع أوامر الشراء (PO) وترحيلها مباشرة للنظام المحاسبي المعتمد." data-en="The system is currently monitoring the accounting inbox, extracting invoice data in real-time to match with POs and post them directly to the approved accounting system."></p>
+                    </div>
+
+                    <button onclick="simulateScan()" class="w-full py-5 bg-blue-600 rounded-2xl font-black text-sm hover:bg-blue-700 transition shadow-lg shadow-blue-500/20" data-ar="تشغيل فحص الامتثال الضريبي (ZATCA)" data-en="Run ZATCA Compliance Check">تشغيل فحص الامتثال الضريبي (ZATCA)</button>
+                    <p id="scanStatus" class="mt-6 text-center text-sm font-bold"></p>
                 </div>
 
-                <div class="glass p-8 rounded-3xl">
-                    <h3 class="font-bold mb-4">💰 تسوية العمولة (10%)</h3>
-                    <input type="number" id="amt" placeholder="مبلغ الفاتورة" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-800 mb-6 outline-none focus:border-green-500">
-                    <div class="flex justify-between text-sm mb-2 text-slate-400"><span>عمولة المنصة:</span> <span id="fee" class="text-red-400">0.00</span></div>
-                    <div class="flex justify-between font-black text-xl border-t border-white/10 pt-4"><span>الصافي للمورد:</span> <span id="net" class="text-green-400">0.00</span></div>
+                <div class="dashboard-card glass p-10 rounded-[3rem] flex flex-col">
+                    <h3 class="text-2xl font-black mb-10 flex items-center gap-4">
+                        <span class="p-4 bg-green-600/10 rounded-2xl text-green-500 text-2xl">💰</span>
+                        <span data-ar="تسوية العمولات" data-en="Commission Settlement">تسوية العمولات</span>
+                    </h3>
+                    <div class="space-y-8 flex-1">
+                        <div>
+                            <label class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block mb-3" data-ar="إجمالي مبلغ الفاتورة" data-en="Total Invoice Amount">إجمالي مبلغ الفاتورة</label>
+                            <div class="relative">
+                                <input type="number" id="amtInput" class="w-full bg-black/40 border border-white/10 p-6 rounded-2xl outline-none focus:border-green-500 text-3xl font-black text-white">
+                                <span class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-500 font-bold">SAR</span>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-6 border-t border-white/5">
+                            <div class="flex justify-between text-slate-400 text-sm">
+                                <span data-ar="عمولة المنصة الذكية (10%):" data-en="Smart Platform Fee (10%):">عمولة المنصة الذكية (10%):</span>
+                                <span id="feeResult" class="text-red-400 font-mono font-bold">0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-green-500/5 p-4 rounded-2xl border border-green-500/10">
+                                <span class="font-black text-lg" data-ar="الصافي للمورد:" data-en="Net to Vendor:">الصافي للمورد:</span>
+                                <span id="netResult" class="text-3xl font-black text-green-400 font-mono">0.00</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.body.className = currentLang === 'ar' ? 'font-ar' : 'font-en';
+            document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'English' : 'العربية';
+            
+            document.querySelectorAll('[data-ar]').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
         function showLogin() { document.getElementById('loginModal').classList.remove('hidden'); }
         function hideLogin() { document.getElementById('loginModal').classList.add('hidden'); }
-        
-        function doLogin(e) {
+
+        function handleRequestOTP(e) {
             e.preventDefault();
-            document.getElementById('marketingPage').classList.add('hidden');
+            document.getElementById('registrationForm').classList.add('hidden');
+            document.getElementById('otpForm').classList.remove('hidden');
+        }
+
+        function finalizeLogin() {
+            const entity = document.getElementById('entityName').value;
             document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('marketingPage').classList.add('hidden');
             document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('welcomeMsg').innerText = (currentLang === 'ar' ? 'مرحباً، ' : 'Welcome, ') + entity;
             window.scrollTo(0,0);
         }
 
-        document.getElementById('amt').addEventListener('input', function(e){
-            let val = parseFloat(e.target.value) || 0;
-            document.getElementById('fee').innerText = (val * 0.1).toFixed(2) + " ر.س";
-            document.getElementById('net').innerText = (val * 0.9).toFixed(2) + " ر.س";
+        function simulateScan() {
+            const s = document.getElementById('scanStatus');
+            s.innerText = currentLang === 'ar' ? "🔍 جاري فحص الامتثال ومطابقة البيانات..." : "🔍 Running compliance & data matching...";
+            s.className = "mt-6 text-center text-sm font-bold text-blue-400 animate-pulse";
+            setTimeout(() => {
+                s.innerText = currentLang === 'ar' ? "❌ فشل الامتثال: الفاتورة لا تحتوي على رمز QR مطابق لهيئة الزكاة" : "❌ Compliance Failed: QR Code mismatch for ZATCA requirements";
+                s.className = "mt-6 text-center text-sm font-bold text-red-500 p-4 bg-red-500/10 rounded-xl border border-red-500/20";
+            }, 2500);
+        }
+
+        document.getElementById('amtInput').addEventListener('input', (e) => {
+            let v = parseFloat(e.target.value) || 0;
+            document.getElementById('feeResult').innerText = (v * 0.1).toFixed(2) + " SAR";
+            document.getElementById('netResult').innerText = (v * 0.9).toFixed(2) + " SAR";
         });
 
-        ScrollReveal().reveal('.load-hidden', { delay: 200, duration: 1000, distance: '30px', origin: 'bottom' });
+        ScrollReveal().reveal('.load-hidden', { delay: 300, duration: 1500, distance: '60px', origin: 'bottom', opacity: 0 });
     </script>
 </body>
 </html>
