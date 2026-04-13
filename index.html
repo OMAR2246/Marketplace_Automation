@@ -3,264 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMINA | التقنية المالية المتكاملة</title>
+    <title>LUMINA | التقنية المالية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* إضافة خط الرقعة (خط مرح ورسمي في آن واحد) */
         @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700;900&display=swap');
         
-        :root { --primary: #00e5ff; --secondary: #2979ff; --bg-dark: #0a0e17; }
+        :root { --accent: #00f2fe; --secondary: #4facfe; --bg: #050a15; }
         
         body { 
-            background-color: var(--bg-dark); 
-            /* تصحيح الألوان: النص الافتراضي الآن فاتح جداً (أبيض مائل للزرقة) */
-            color: #f0f9ff; 
-            font-family: 'Cairo', sans-serif; /* الخط الافتراضي */
+            background-color: var(--bg); 
+            color: #e2e8f0; 
+            font-family: 'Cairo', sans-serif;
             overflow-x: hidden;
-            min-h-screen;
+            margin: 0;
         }
 
-        /* خط الرقعة للعناوين الرئيسية لإضافة طابع رسمي ومرح */
         .font-ruqaa { font-family: 'Aref Ruqaa', serif; }
 
-        /* خلفية 4D تفاعلية (شبكة متحركة) */
-        #interactive-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: linear-gradient(135deg, #0a0e17 0%, #112240 100%);
-            opacity: 0.8;
-        }
+        /* خلفية 4D تفاعلية */
+        #canvas { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.6; }
 
         .glass { 
             background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(25px); 
+            backdrop-filter: blur(20px); 
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 30px; 
+            border-radius: 24px;
         }
 
-        .btn-premium { 
-            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3); 
-            transition: 0.3s; color: #0a0e17 !important; /* النص داخل الأزرار قاتم للقراءة */
+        .btn-main {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: #050a15 !important;
+            font-weight: 900;
+            transition: 0.4s;
+            box-shadow: 0 0 20px rgba(0, 242, 260, 0.3);
         }
-        .btn-premium:hover { transform: scale(1.03); box-shadow: 0 15px 35px rgba(0, 229, 255, 0.5); }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 242, 260, 0.5); }
+
+        .input-field {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px; border-radius: 15px; color: white; text-align: center; outline: none;
+        }
+        .input-field:focus { border-color: var(--accent); }
 
         .hidden { display: none !important; }
-
-        /* تحسين وضوح النصوص في البطاقات */
-        .card-text { color: #94a3b8; } /* رمادي متوسط */
-        .card-highlight { color: #e0f2fe; } /* أزرق فاتح جداً */
-
-        /* تصميم مدخلات البيانات */
-        .input-lumina {
-            w-full bg-white/5 border border-white/10 p-4 rounded-xl text-center text-white outline-none focus:border-cyan-400 transition;
-        }
+        
+        /* تحسين وضوح النصوص الفاقعة */
+        .text-glow { text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
     </style>
 </head>
-<body class="hero-bg">
+<body>
 
-    <canvas id="interactive-bg"></canvas>
+    <canvas id="canvas"></canvas>
 
-    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center px-10 glass rounded-none border-t-0 border-x-0 bg-black/40">
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center px-8 md:px-16 bg-black/20 backdrop-blur-md">
         <div class="flex items-center gap-3 cursor-pointer" onclick="showSection('home')">
-            <div class="w-10 h-10 btn-premium rounded-xl flex items-center justify-center font-black text-xl">L</div>
-            <span class="text-xl font-black lumina-logo text-white">LUMINA</span>
+            <div class="w-10 h-10 btn-main rounded-lg flex items-center justify-center text-xl">L</div>
+            <span class="text-xl font-black font-ruqaa tracking-widest">LUMINA</span>
         </div>
         
         <div class="flex items-center gap-6">
-            <button onclick="toggleLang()" id="langBtn" class="text-[10px] font-bold border border-white/20 px-3 py-1 rounded-md text-slate-300">EN</button>
-            
-            <div id="userNav" class="hidden flex items-center gap-3 cursor-pointer group" onclick="showSection('profile')">
+            <button onclick="toggleLang()" id="langBtn" class="border border-white/20 px-4 py-1 rounded-lg text-xs font-bold hover:bg-white/10">EN</button>
+            <div id="userProfile" class="hidden flex items-center gap-3 bg-white/5 p-1 pr-4 rounded-full border border-white/10 cursor-pointer" onclick="showSection('profile')">
                 <div class="text-right">
-                    <p class="text-[10px] font-bold group-hover:text-cyan-400 transition" id="navName">مؤسسة عمر</p>
-                    <p class="text-[8px] text-slate-500 uppercase tracking-tighter" id="userRoleNav">Admin</p>
+                    <p class="text-[10px] font-bold" id="navName">مؤسسة عمر</p>
+                    <p class="text-[8px] text-cyan-400 uppercase" id="navRole">Admin</p>
                 </div>
-                <div class="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center group-hover:border-cyan-500 transition">👤</div>
+                <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">👤</div>
             </div>
-
-            <button id="loginBtn" onclick="showSection('auth')" class="bg-white/5 border border-white/10 px-5 py-2 rounded-full text-xs font-bold text-white hover:bg-white/10 transition">دخول</button>
+            <button id="loginNav" onclick="showSection('auth')" class="btn-main px-6 py-2 rounded-full text-xs">دخول</button>
         </div>
     </nav>
 
-    <main id="homeSection" class="pt-48 px-6 pb-20 max-w-7xl mx-auto text-center">
-        <h1 class="font-ruqaa text-6xl md:text-9xl font-black leading-tight mb-8">أتمتة مالية <br><span class="text-transparent bg-clip-text btn-premium italic">بلا حدود</span></h1>
-        <p class="text-slate-400 max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed mb-12">المنصة الشاملة لربط الأنظمة، إدارة المحافظ، والامتثال الضريبي المتكامل.</p>
-        <div class="flex justify-center gap-4">
-            <button onclick="showSection('services')" class="btn-premium px-10 py-5 rounded-2xl font-black text-lg">استكشاف الباقات</button>
+    <section id="homeSection" class="pt-48 px-6 pb-20 max-w-6xl mx-auto text-center">
+        <h1 id="mainTitle" class="font-ruqaa text-6xl md:text-9xl font-black mb-8 text-glow">أتمتة مالية <br><span class="text-white">بلا حدود</span></h1>
+        <p id="mainDesc" class="text-slate-400 max-w-2xl mx-auto text-lg mb-12">المنصة المتكاملة لربط الأنظمة، إدارة المحافظ، والامتثال الضريبي الفوري.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <button onclick="showSection('services')" id="btnExplore" class="btn-main px-10 py-5 rounded-2xl text-lg">استكشاف الباقات</button>
+            <button onclick="showSection('auth')" id="btnStart" class="bg-white/5 border border-white/10 px-10 py-5 rounded-2xl font-bold hover:bg-white/10 transition">ابدأ الآن</button>
         </div>
-    </main>
+    </section>
 
-    <main id="servicesSection" class="hidden pt-32 px-6 pb-20 max-w-7xl mx-auto">
-        <button onclick="showSection('home')" class="mb-10 text-slate-500 text-xs hover:text-white transition">← العودة للرئيسية</button>
-        <h2 class="font-ruqaa text-4xl font-black mb-16 text-center text-white">الخدمات والباقات المتاحة</h2>
+    <section id="servicesSection" class="hidden pt-40 px-6 pb-20 max-w-7xl mx-auto">
+        <button onclick="showSection('home')" class="mb-10 text-cyan-400 text-xs font-bold">← العودة للرئيسية</button>
+        <h2 id="srvTitle" class="font-ruqaa text-4xl text-center mb-16">باقات الإشتراك المتاحة</h2>
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass p-10 border-white/5">
-                <h3 class="font-bold text-xl mb-4 card-highlight">باقة الانطلاق (Starter)</h3>
-                <p class="text-5xl font-black mb-8 text-white">199 <span class="text-sm">SAR</span></p>
-                <ul class="text-xs card-text space-y-4 mb-10 list-disc list-inside">
-                    <li>فواتير ضريبية (100/شهر)</li>
-                    <li>ربط ZATCA الأساسي</li>
-                    <li>أتمتة مخزون بسيطة</li>
-                    <li>دعم فني بريد إلكتروني</li>
+            <div class="glass p-10 hover:border-cyan-500/50 transition">
+                <h3 class="font-bold text-xl mb-4 text-cyan-400" id="p1-name">باقة الانطلاق</h3>
+                <p class="text-5xl font-black mb-8">199 <span class="text-sm italic text-slate-500">SAR</span></p>
+                <ul class="text-sm text-slate-400 space-y-4 mb-10" id="p1-features">
+                    <li>✓ 100 فاتورة ضريبية شهرياً</li>
+                    <li>✓ ربط ZATCA الأساسي</li>
+                    <li>✓ دعم فني عبر البريد</li>
                 </ul>
-                <button class="w-full py-3 rounded-xl border border-white/10 font-bold hover:bg-white/5 text-white transition">اشترك الآن</button>
+                <button class="w-full py-4 rounded-xl border border-white/10 font-bold hover:bg-white/5 transition">اشترك الآن</button>
             </div>
-            <div class="glass p-10 border-cyan-500/50 relative overflow-hidden transform md:-translate-y-4 bg-cyan-950/20">
-                <div class="absolute top-0 left-0 bg-cyan-500 text-black text-[10px] font-black px-4 py-1 uppercase">الأكثر طلباً</div>
-                <h3 class="font-bold text-xl mb-4 text-cyan-400">باقة النمو (Business)</h3>
-                <p class="text-5xl font-black mb-8 text-white">499 <span class="text-sm">SAR</span></p>
-                <ul class="text-xs card-highlight space-y-4 mb-10 list-disc list-inside">
-                    <li>فواتير غير محدودة</li>
-                    <li>إدارة محفظة بنكية كاملة</li>
-                    <li>ربط API مباشر (أتمتة كاملة)</li>
-                    <li>تحليلات بيانية متقدمة</li>
+            <div class="glass p-10 border-cyan-500/50 bg-cyan-500/5 transform md:-translate-y-4">
+                <div class="bg-cyan-500 text-black text-[10px] font-black px-4 py-1 rounded-full w-max mb-6" id="popularTag">الأكثر طلباً</div>
+                <h3 class="font-bold text-xl mb-4 text-cyan-400" id="p2-name">باقة النمو (Business)</h3>
+                <p class="text-5xl font-black mb-8">499 <span class="text-sm italic text-slate-500">SAR</span></p>
+                <ul class="text-sm text-slate-200 space-y-4 mb-10" id="p2-features">
+                    <li>✓ فواتير غير محدودة</li>
+                    <li>✓ إدارة المحافظ البنكية</li>
+                    <li>✓ ربط API مباشر</li>
+                    <li>✓ تحليلات بيانية متقدمة</li>
                 </ul>
-                <button class="w-full btn-premium py-4 rounded-xl font-bold text-lg">اشترك الآن</button>
+                <button class="w-full btn-main py-4 rounded-xl">اشترك الآن</button>
             </div>
-            <div class="glass p-10 border-white/5">
-                <h3 class="font-bold text-xl mb-4 card-highlight">حلول المؤسسات (Enterprise)</h3>
-                <p class="text-xl font-black mb-8 italic text-slate-500">مخصص (Custom)</p>
-                <ul class="text-xs card-text space-y-4 mb-10 list-disc list-inside">
-                    <li>سيرفرات خاصة معزولة</li>
-                    <li>أمن سيبراني مخصص</li>
-                    <li>مدير حساب خاص</li>
-                    <li>تكامل مخصص مع أنظمة ERP</li>
+            <div class="glass p-10 hover:border-cyan-500/50 transition">
+                <h3 class="font-bold text-xl mb-4 text-cyan-400" id="p3-name">حلول المؤسسات</h3>
+                <p class="text-2xl font-black mb-8 italic text-slate-500" id="customPrice">مخصص (Custom)</p>
+                <ul class="text-sm text-slate-400 space-y-4 mb-10" id="p3-features">
+                    <li>✓ سيرفرات خاصة</li>
+                    <li>✓ أمن سيبراني متقدم</li>
+                    <li>✓ مدير حساب مخصص</li>
+                    <li>✓ تكامل ERP شامل</li>
                 </ul>
-                <button class="w-full py-3 rounded-xl border border-white/10 font-bold hover:bg-white/5 text-white transition">تواصل معنا</button>
+                <button class="w-full py-4 rounded-xl border border-white/10 font-bold hover:bg-white/5 transition" id="contactBtn">تواصل معنا</button>
             </div>
         </div>
-    </main>
+    </section>
 
-    <main id="authSection" class="hidden fixed inset-0 z-[100] bg-[#050a15]/95 backdrop-blur-3xl flex items-center justify-center p-6 text-center">
-        <div class="glass w-full max-w-md p-10 relative">
-            <button onclick="showSection('home')" class="absolute top-6 left-6 text-slate-600 hover:text-white transition">✕</button>
+    <section id="authSection" class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-6">
+        <div class="glass w-full max-w-md p-10 text-center relative">
+            <button onclick="showSection('home')" class="absolute top-6 left-6 text-slate-500 hover:text-white">✕</button>
             
-            <div id="loginMethodSelect">
-                <h2 class="font-ruqaa text-3xl font-black mb-10 text-white">اختر نوع الدخول</h2>
+            <div id="roleSelector">
+                <h2 class="font-ruqaa text-3xl mb-10" id="authChoice">اختر نوع الولوج</h2>
+                <div class="grid gap-4">
+                    <button onclick="setRole('admin')" class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500 transition text-right">
+                        <p class="font-bold" id="roleAdmin">أدمن المؤسسة / الشركات</p>
+                        <p class="text-[10px] text-slate-500" id="roleAdminDesc">إدارة كاملة، إضافة موظفين، واشتراكات</p>
+                    </button>
+                    <button onclick="setRole('employee')" class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/40 transition text-right">
+                        <p class="font-bold" id="roleUser">دخول الموظفين / يوزرز</p>
+                        <p class="text-[10px] text-slate-500" id="roleUserDesc">الوصول للأدوات والخدمات المسموحة</p>
+                    </button>
+                </div>
+            </div>
+
+            <div id="loginFields" class="hidden space-y-4">
+                <h3 class="font-bold text-xl mb-6 text-cyan-400" id="loginFormTitle">تسجيل الدخول</h3>
+                <input type="text" id="userInput" placeholder="اسم المستخدم" class="input-field">
+                <div id="adminOnlyFields" class="space-y-4">
+                    <input type="text" id="orgInput" placeholder="اسم المؤسسة" class="input-field">
+                    <input type="tel" id="phoneInput" placeholder="رقم جوال المسؤول" class="input-field">
+                </div>
+                <input type="password" placeholder="كلمة المرور" class="input-field">
+                <button onclick="processLogin()" class="w-full btn-main py-4 rounded-xl mt-6" id="loginFinalBtn">تحقق ودخول</button>
+                <button onclick="backToRoles()" class="text-[10px] text-slate-500 mt-4 block mx-auto underline">العودة لأنواع الدخول</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="profileSection" class="hidden pt-40 px-6 pb-20 max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="font-ruqaa text-4xl" id="profileTitle">لوحة التحكم</h2>
+            <button onclick="location.reload()" class="text-red-500 text-xs font-bold">تسجيل الخروج 🚪</button>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 glass p-8 space-y-6 h-max">
+                <div class="w-24 h-24 bg-cyan-500/20 rounded-3xl mx-auto flex items-center justify-center text-4xl">👤</div>
+                <div class="text-center">
+                    <h3 class="font-black text-xl" id="profOrgName">مؤسسة عمر</h3>
+                    <p class="text-xs text-slate-500" id="profRoleName">المسؤول الرئيسي</p>
+                </div>
+                <div class="pt-6 border-t border-white/10 space-y-3" id="adminActions">
+                    <button class="w-full text-right p-4 rounded-xl bg-white/5 text-xs font-bold hover:bg-cyan-500/10 transition">👥 إضافة موظفين الجدد</button>
+                    <button class="w-full text-right p-4 rounded-xl bg-white/5 text-xs font-bold hover:bg-cyan-500/10 transition">📝 تقارير الأتمتة</button>
+                </div>
+            </div>
+            <div class="lg:col-span-2 glass p-8">
+                <h3 class="font-bold text-xl mb-8 border-b border-white/10 pb-4" id="activeSrv">الخدمات النشطة</h3>
                 <div class="space-y-4">
-                    <button onclick="showLoginForm('admin')" class="w-full p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500 transition text-right flex justify-between items-center">
+                    <div class="flex justify-between items-center p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-cyan-500/20 transition">
                         <div>
-                            <p class="font-bold text-white">أدمن المؤسسة (Admin)</p>
-                            <p class="text-[10px] text-slate-500">لإدارة الاشتراكات وإضافة الموظفين</p>
+                            <p class="font-bold">نظام الربط مع ZATCA</p>
+                            <p class="text-[10px] text-emerald-400 font-bold uppercase">Active ✓</p>
                         </div>
-                        <span class="text-cyan-400">🔑</span>
-                    </button>
-                    <button onclick="showLoginForm('employee')" class="w-full p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 transition text-right flex justify-between items-center">
-                        <div>
-                            <p class="font-bold text-white">دخول الموظفين (User)</p>
-                            <p class="text-[10px] text-slate-500">للوصول السريع للأدوات المسموحة</p>
-                        </div>
-                        <span class="text-slate-500">👤</span>
-                    </button>
-                </div>
-            </div>
-
-            <div id="loginFormArea" class="hidden space-y-4 mt-8">
-                <h3 class="font-bold text-lg text-white mb-6" id="loginFormTitle">دخول الأدمن</h3>
-                <input type="text" placeholder="اسم المستخدم" class="input-lumina">
-                <input type="text" id="orgNameInput" placeholder="اسم المؤسسة" class="input-lumina">
-                <input type="tel" id="phoneInput" placeholder="رقم جوال المسؤول" class="input-lumina">
-                <input type="password" placeholder="كلمة المرور" class="input-lumina">
-                <button onclick="loginUser()" class="w-full btn-premium py-4 rounded-xl font-black text-white mt-6">تحقق ودخول</button>
-                <button onclick="backToMethods()" class="text-slate-600 text-[10px] mt-2">← العودة للخلف</button>
-            </div>
-        </div>
-    </main>
-
-    <main id="profileSection" class="hidden pt-32 px-6 pb-20 max-w-6xl mx-auto">
-        <button onclick="showSection('home')" class="mb-10 text-slate-500 text-xs hover:text-white transition">← العودة للرئيسية</button>
-        <div class="grid lg:grid-cols-4 gap-8">
-            <aside class="lg:col-span-1">
-                <div class="glass p-8 text-center sticky top-32">
-                    <div class="w-20 h-20 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-3xl mx-auto mb-4 flex items-center justify-center font-black text-3xl text-white">👤</div>
-                    <h3 class="font-bold text-white">مؤسسة عمر للتجارة</h3>
-                    <p class="text-[10px] card-text" id="userRoleProfile">الباقة: رواد الأعمال (Active)</p>
-                    <div class="mt-8 space-y-2">
-                        <button onclick="alert('واجهة إدارة الموظفين قيد التطوير')" class="w-full text-right p-3 rounded-xl bg-white/5 text-[10px] font-bold text-cyan-400">👥 إدارة الموظفين (يوزرز)</button>
-                        <button onclick="showSection('services')" class="w-full text-right p-3 rounded-xl bg-white/5 text-[10px] font-bold text-white">🚀 ترقية الباقة</button>
-                        <button onclick="location.reload()" class="w-full text-right p-3 rounded-xl bg-red-500/10 text-red-500 text-[10px] font-bold">🚪 تسجيل الخروج</button>
-                    </div>
-                </div>
-            </aside>
-            <div class="lg:col-span-3 space-y-6">
-                <div class="glass p-8 border-cyan-500/20">
-                    <h2 class="text-xl font-black mb-6 text-white">لوحة التحكم السريعة</h2>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="p-6 bg-white/5 rounded-2xl border border-white/5"><p class="text-[10px] card-text">المحفظة</p><p class="text-2xl font-black text-white">0.00 SAR</p></div>
-                        <div class="p-6 bg-white/5 rounded-2xl border border-white/5"><p class="text-[10px] card-text">الفواتير هذا الشهر</p><p class="text-2xl font-black text-emerald-400">120 فاتورة</p></div>
+                        <button class="px-6 py-2 rounded-lg bg-white/10 text-[10px] font-bold">فتح النظام</button>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
     <script>
-        // تفعيل اللغة
-        let lang = 'ar';
+        // نظام الترجمة المتقدم
+        let isEng = false;
+        const translations = {
+            ar: {
+                title: "أتمتة مالية <br><span class='text-white'>بلا حدود</span>",
+                desc: "المنصة المتكاملة لربط الأنظمة، إدارة المحافظ، والامتثال الضريبي الفوري.",
+                btnEx: "استكشاف الباقات", btnSt: "ابدأ الآن", srvT: "باقات الإشتراك المتاحة",
+                p1: "باقة الانطلاق", p2: "باقة النمو (Business)", p3: "حلول المؤسسات",
+                authC: "اختر نوع الولوج", roleA: "أدمن المؤسسة / الشركات", roleU: "دخول الموظفين / يوزرز"
+            },
+            en: {
+                title: "Financial Automation <br><span class='text-glowing'>Limitless</span>",
+                desc: "Unified platform for system integration, wallet management, and tax compliance.",
+                btnEx: "Explore Plans", btnSt: "Get Started", srvT: "Available Subscriptions",
+                p1: "Starter Plan", p2: "Growth Plan (Business)", p3: "Enterprise Solutions",
+                authC: "Choose Access Type", roleA: "Organization Admin", roleU: "Employee Login"
+            }
+        };
+
         function toggleLang() {
-            lang = lang === 'ar' ? 'en' : 'ar';
-            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            document.getElementById('langBtn').innerText = lang === 'ar' ? 'AR' : 'EN';
-            alert("Switching to English UI...");
+            isEng = !isEng;
+            const t = isEng ? translations.en : translations.ar;
+            document.documentElement.dir = isEng ? 'ltr' : 'rtl';
+            document.getElementById('langBtn').innerText = isEng ? 'AR' : 'EN';
+            
+            document.getElementById('mainTitle').innerHTML = t.title;
+            document.getElementById('mainDesc').innerText = t.desc;
+            document.getElementById('btnExplore').innerText = t.btnEx;
+            document.getElementById('btnStart').innerText = t.btnSt;
+            document.getElementById('srvTitle').innerText = t.srvT;
+            document.getElementById('p1-name').innerText = t.p1;
+            document.getElementById('p2-name').innerText = t.p2;
+            document.getElementById('p3-name').innerText = t.p3;
+            document.getElementById('authChoice').innerText = t.authC;
+            document.getElementById('roleAdmin').innerText = t.roleA;
+            document.getElementById('roleUser').innerText = t.roleU;
         }
 
-        // التنقل بين الأقسام
+        // نظام التنقل
         function showSection(id) {
             const sections = ['homeSection', 'servicesSection', 'profileSection', 'authSection'];
             sections.forEach(s => document.getElementById(s).classList.add('hidden'));
             document.getElementById(id + 'Section').classList.remove('hidden');
-            if(id === 'auth') backToMethods(); // إعادة تعيين مودال الدخول
             window.scrollTo(0,0);
         }
 
-        // نظام الدخول المتعدد
-        let currentRole = '';
-        function showLoginForm(role) {
-            currentRole = role;
-            document.getElementById('loginMethodSelect').classList.add('hidden');
-            document.getElementById('loginFormArea').classList.remove('hidden');
-            
+        // معالجة تسجيل الدخول
+        let userRole = '';
+        function setRole(role) {
+            userRole = role;
+            document.getElementById('roleSelector').classList.add('hidden');
+            document.getElementById('loginFields').classList.remove('hidden');
+            const adminFields = document.getElementById('adminOnlyFields');
             const title = document.getElementById('loginFormTitle');
-            const org = document.getElementById('orgNameInput');
-            const phone = document.getElementById('phoneInput');
-
+            
             if(role === 'admin') {
-                title.innerText = "دخول أدمن المؤسسة";
-                org.classList.remove('hidden');
-                phone.classList.remove('hidden');
+                adminFields.classList.remove('hidden');
+                title.innerText = isEng ? "Admin Login" : "دخول الأدمن";
             } else {
-                title.innerText = "دخول الموظفين";
-                org.classList.add('hidden');
-                phone.classList.add('hidden');
+                adminFields.classList.add('hidden');
+                title.innerText = isEng ? "User Login" : "دخول الموظفين";
             }
         }
 
-        function backToMethods() {
-            document.getElementById('loginMethodSelect').classList.remove('hidden');
-            document.getElementById('loginFormArea').classList.add('hidden');
+        function backToRoles() {
+            document.getElementById('roleSelector').classList.remove('hidden');
+            document.getElementById('loginFields').classList.add('hidden');
         }
 
-        // محاكاة تسجيل الدخول
-        function loginUser() {
-            alert(`تم تسجيل الدخول كـ ${currentRole === 'admin' ? 'أدمن' : 'موظف'} بنجاح!`);
-            document.getElementById('loginBtn').classList.add('hidden');
-            document.getElementById('userNav').classList.remove('hidden');
-            document.getElementById('userRoleNav').innerText = currentRole === 'admin' ? 'Admin' : 'User';
-            document.getElementById('userRoleProfile').innerText = `الباقة: رواد الأعمال (${currentRole === 'admin' ? 'Admin' : 'User'})`;
+        function processLogin() {
+            const name = document.getElementById('userInput').value || "عمر";
+            const org = document.getElementById('orgInput').value || "شركة لومينا";
+            
+            document.getElementById('loginNav').classList.add('hidden');
+            document.getElementById('userProfile').classList.remove('hidden');
+            document.getElementById('navName').innerText = name;
+            document.getElementById('navRole').innerText = userRole.toUpperCase();
+            document.getElementById('profOrgName').innerText = org;
+            document.getElementById('profRoleName').innerText = userRole === 'admin' ? "المسؤول الرئيسي" : "موظف تقني";
+            
+            if(userRole === 'employee') document.getElementById('adminActions').classList.add('hidden');
+            else document.getElementById('adminActions').classList.remove('hidden');
+
             showSection('profile');
         }
 
-        // تفعيل الخلفية التفاعلية 4D
-        const canvas = document.getElementById('interactive-bg');
+        // محرك الخلفية التفاعلية 4D
+        const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
+        let particles = [];
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        let particles = [];
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
+                this.size = Math.random() * 2 + 0.1;
                 this.speedX = (Math.random() - 0.5) * 0.5;
                 this.speedY = (Math.random() - 0.5) * 0.5;
             }
@@ -270,20 +295,19 @@
                 if(this.y > canvas.height || this.y < 0) this.speedY *= -1;
             }
             draw() {
-                ctx.fillStyle = 'rgba(0, 229, 255, 0.1)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.random() * 2); ctx.fill();
+                ctx.fillStyle = 'rgba(0, 242, 254, 0.4)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
             }
         }
-        function init() { for(let i=0; i<100; i++) particles.push(new Particle()); }
+
+        function init() { particles = []; for(let i=0; i<150; i++) particles.push(new Particle()); }
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animate);
         }
         init(); animate();
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight; init();
-        });
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
     </script>
 </body>
 </html>
