@@ -3,181 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMINA | Automation Platform</title>
+    <title>LUMINA | نظام الأتمتة المالية للمنشآت</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;700;900&display=swap');
         
-        :root { --accent: #00d2ff; --secondary: #3a7bd5; --bg: #030712; }
+        :root { --accent: #00e5ff; --gold: #d4af37; --bg: #010409; }
         
-        body { 
-            background-color: var(--bg); 
-            color: #f1f5f9; 
-            font-family: 'Cairo', sans-serif;
-            overflow-x: hidden;
-            transition: all 0.3s ease;
-        }
-
+        body { background-color: var(--bg); color: #e6edf3; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         .font-ruqaa { font-family: 'Aref Ruqaa', serif; }
-        #canvas { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.4; }
 
-        .glass { 
-            background: rgba(15, 23, 42, 0.7); 
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 20px;
+        /* خلفية 4D سينمائية */
+        #hero-canvas { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.3; }
+
+        .executive-card { 
+            background: linear-gradient(145deg, rgba(22, 27, 34, 0.9), rgba(13, 17, 23, 0.9));
+            backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .executive-card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37, #f1d37e);
+            color: #010409 !important; font-weight: 900; border-radius: 12px;
         }
 
-        .btn-main {
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
-            color: #030712 !important;
-            font-weight: 800;
-            transition: 0.3s;
+        .btn-cyan {
+            background: linear-gradient(135deg, #00e5ff, #2979ff);
+            color: #010409 !important; font-weight: 900; border-radius: 12px;
         }
 
-        .premium-text { background: linear-gradient(to bottom, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .input-premium {
+            width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1);
+            padding: 16px; border-radius: 14px; color: white; outline: none; transition: 0.3s;
+        }
+        .input-premium:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
+
         .hidden { display: none !important; }
+        .shimmer { background: linear-gradient(90deg, #fff, #8b949e, #fff); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s infinite linear; }
+        @keyframes shimmer { 0% { background-position: -200%; } 100% { background-position: 200%; } }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas"></canvas>
+    <canvas id="hero-canvas"></canvas>
 
-    <nav class="fixed top-0 w-full z-50 p-5 flex justify-between items-center px-10 bg-black/40 backdrop-blur-lg border-b border-white/5">
+    <nav class="fixed top-0 w-full z-[100] p-6 flex justify-between items-center px-12 bg-black/50 backdrop-blur-2xl border-b border-white/5">
         <div class="flex items-center gap-3 cursor-pointer" onclick="showSection('home')">
-            <div class="w-9 h-9 btn-main rounded-lg flex items-center justify-center text-xl">L</div>
-            <span class="text-xl font-black font-ruqaa tracking-tighter">LUMINA</span>
+            <div class="w-10 h-10 btn-cyan flex items-center justify-center text-2xl font-black">L</div>
+            <span class="text-2xl font-black font-ruqaa shimmer">LUMINA</span>
         </div>
-        
-        <div class="flex items-center gap-6">
-            <button onclick="toggleLang()" id="langBtn" class="bg-white/5 border border-white/10 px-4 py-1.5 rounded-xl text-[10px] font-bold hover:bg-cyan-500/20 transition-all text-cyan-400">EN</button>
-            
-            <div id="userProfile" class="hidden flex items-center gap-3 bg-white/5 p-1 pr-4 rounded-full border border-white/10 cursor-pointer" onclick="showSection('profile')">
-                <p class="text-[10px] font-bold" id="navName">عمر</p>
-                <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">👤</div>
+        <div class="flex items-center gap-5">
+            <button onclick="toggleLang()" id="langBtn" class="text-[10px] font-bold border border-white/10 px-4 py-2 rounded-lg hover:bg-white/5 transition">EN</button>
+            <div id="navUser" class="hidden flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <span class="text-[10px] font-bold text-cyan-400" id="userNameNav"></span>
+                <div class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center">👤</div>
             </div>
-            <button id="loginNav" onclick="showSection('auth')" class="btn-main px-6 py-2 rounded-full text-xs data-lang" data-ar="تسجيل دخول" data-en="Login">تسجيل دخول</button>
+            <button id="navLoginBtn" onclick="showSection('auth')" class="btn-cyan px-8 py-2.5 text-xs">فتح حساب مؤسسة</button>
         </div>
     </nav>
 
-    <section id="homeSection" class="pt-40 px-6 pb-20 max-w-6xl mx-auto text-center">
-        <h1 id="mainTitle" class="font-ruqaa text-6xl md:text-8xl font-bold mb-6 premium-text data-lang" 
-            data-ar="أتمتة مالية <br>بذكاء مستقبلي" 
-            data-en="Financial Automation <br>with Future Intelligence">أتمتة مالية <br>بذكاء مستقبلي</h1>
-        <p id="mainDesc" class="text-slate-400 max-w-2xl mx-auto text-lg mb-10 leading-relaxed data-lang"
-           data-ar="الحل الشامل والموثق لإدارة الفواتير والأتمتة المالية المتكاملة."
-           data-en="The comprehensive and certified solution for invoice management and integrated financial automation.">الحل الشامل والموثق لإدارة الفواتير والأتمتة المالية المتكاملة.</p>
-        <button onclick="showSection('services')" class="btn-main px-10 py-4 rounded-xl text-md data-lang" data-ar="قائمة الخدمات والباقات" data-en="Explore Plans">قائمة الخدمات والباقات</button>
+    <section id="homeSection" class="pt-60 px-6 pb-20 max-w-6xl mx-auto text-center">
+        <h1 class="font-ruqaa text-7xl md:text-8xl font-black mb-8 shimmer data-lang" data-ar="أتمتة مالية <br>بثقة الخبراء" data-en="Financial Automation <br>Built on Trust">أتمتة مالية <br>بثقة الخبراء</h1>
+        <p class="text-slate-400 max-w-3xl mx-auto text-xl mb-12 leading-relaxed data-lang" data-ar="نظام متكامل لإدارة الفواتير والربط الضريبي والعمليات المحاسبية، مصمم خصيصاً لتلبية احتياجات الإدارات المالية في الشركات الكبرى." data-en="An integrated system for invoice management, tax linking, and accounting processes, specifically designed for CFOs.">نظام متكامل لإدارة الفواتير والربط الضريبي والعمليات المحاسبية، مصمم خصيصاً لتلبية احتياجات الإدارات المالية في الشركات الكبرى.</p>
+        <button onclick="showSection('services')" class="btn-cyan px-14 py-5 text-lg shadow-2xl hover:scale-105 transition data-lang" data-ar="عرض الباقات المتاحة" data-en="View Pricing Plans">عرض الباقات المتاحة</button>
     </section>
 
-    <section id="servicesSection" class="hidden pt-32 px-6 pb-20 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="font-ruqaa text-4xl mb-4 data-lang" data-ar="خدماتنا وحلولنا البرمجية" data-en="Our Services & Software Solutions">خدماتنا وحلولنا البرمجية</h2>
+    <section id="servicesSection" class="hidden pt-36 px-6 pb-20 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="font-ruqaa text-5xl mb-4 text-white">خطط الربط والأتمتة</h2>
+            <p class="text-slate-500 italic">حلول مرنة تبدأ من الشركات الناشئة وصولاً للمجموعات القابضة</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="glass p-8 flex flex-col">
-                <h3 class="font-bold text-lg mb-4 data-lang" data-ar="الفوترة الاقتصادية" data-en="Eco Billing">الفوترة الاقتصادية</h3>
-                <p class="text-3xl font-black mb-6">49 <span class="text-xs text-slate-500 font-normal">SAR</span></p>
-                <ul class="text-[11px] text-slate-400 space-y-3 flex-grow mb-8 data-lang" 
-                    data-ar="<li>✓ 50 فاتورة ضريبية</li><li>✓ باركود ZATCA</li>" 
-                    data-en="<li>✓ 50 Tax Invoices</li><li>✓ ZATCA Barcode</li>">
-                    <li>✓ 50 فاتورة ضريبية</li>
-                    <li>✓ باركود ZATCA</li>
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="executive-card p-10 flex flex-col border-t-4 border-t-cyan-500">
+                <h3 class="font-bold text-xl mb-2">أتمتة الربط الذكي</h3>
+                <span class="text-[10px] text-cyan-500 font-black mb-6">10 موظفين / 10 Employees</span>
+                <p class="text-5xl font-black mb-10">2,500 <span class="text-sm font-normal text-slate-500">ريال/سنة</span></p>
+                <ul class="text-sm text-slate-400 space-y-4 flex-grow mb-10">
+                    <li>✓ ربط مباشر مع ZATCA</li>
+                    <li>✓ أرشفة إلكترونية سحابية</li>
+                    <li>✓ دعم فني أولوية</li>
                 </ul>
-                <button class="w-full py-3 rounded-xl border border-white/10 text-xs font-bold data-lang" data-ar="اختيار" data-en="Select">اختيار</button>
+                <button onclick="selectPlan('أتمتة الربط (10 موظفين) - 2500 ريال')" class="w-full btn-cyan py-4">اختيار الباقة</button>
             </div>
-            <div class="glass p-8 border-cyan-500/20 bg-cyan-500/5">
-                <h3 class="font-bold text-lg mb-4 data-lang" data-ar="باقة رواد الأعمال" data-en="Entrepreneur Plan">باقة رواد الأعمال</h3>
-                <p class="text-3xl font-black mb-6">199 <span class="text-xs text-slate-500 font-normal">SAR</span></p>
-                <ul class="text-[11px] text-slate-200 space-y-3 flex-grow mb-8 data-lang" 
-                    data-ar="<li>✓ فواتير غير محدودة</li><li>✓ أتمتة دورية</li>" 
-                    data-en="<li>✓ Unlimited Invoices</li><li>✓ Recurring Automation</li>">
-                    <li>✓ فواتير غير محدودة</li>
-                    <li>✓ أتمتة دورية</li>
+
+            <div class="executive-card p-10 flex flex-col border-t-4 border-t-blue-500 scale-105 bg-blue-500/5">
+                <h3 class="font-bold text-xl mb-2">أتمتة النمو المتقدم</h3>
+                <span class="text-[10px] text-blue-400 font-black mb-6">30 موظف / 30 Employees</span>
+                <p class="text-5xl font-black mb-10">4,500 <span class="text-sm font-normal text-slate-500">ريال/سنة</span></p>
+                <ul class="text-sm text-slate-300 space-y-4 flex-grow mb-10">
+                    <li>✓ جميع مميزات الباقة السابقة</li>
+                    <li>✓ ربط API للمحافظ البنكية</li>
+                    <li>✓ تقارير تحليلية للتدفق المالي</li>
                 </ul>
-                <button class="w-full btn-main py-3 rounded-xl text-xs data-lang" data-ar="الأكثر شيوعاً" data-en="Most Popular">الأكثر شيوعاً</button>
+                <button onclick="selectPlan('أتمتة النمو (30 موظف) - 4500 ريال')" class="w-full btn-cyan py-4">اختيار الباقة</button>
             </div>
-            <div class="glass p-8">
-                <h3 class="font-bold text-lg mb-4 data-lang" data-ar="أتمتة الربط الذكي" data-en="Smart Sync">أتمتة الربط الذكي</h3>
-                <p class="text-3xl font-black mb-6">599 <span class="text-xs text-slate-500 font-normal">SAR</span></p>
-                <ul class="text-[11px] text-slate-400 space-y-3 flex-grow mb-8 data-lang" 
-                    data-ar="<li>✓ فتح API للربط</li><li>✓ تزامن بنكي</li>" 
-                    data-en="<li>✓ API Access</li><li><li>✓ Bank Sync</li>">
-                    <li>✓ فتح API للربط</li>
-                    <li>✓ تزامن بنكي</li>
+
+            <div class="executive-card p-10 flex flex-col border-t-4 border-t-purple-500">
+                <h3 class="font-bold text-xl mb-2">حلول الشركات المتكاملة</h3>
+                <span class="text-[10px] text-purple-400 font-black mb-6">100 موظف / 100 Employees</span>
+                <p class="text-5xl font-black mb-10">6,000 <span class="text-sm font-normal text-slate-500">ريال/سنة</span></p>
+                <ul class="text-sm text-slate-400 space-y-4 flex-grow mb-10">
+                    <li>✓ أتمتة شاملة لـ 100 مستخدم</li>
+                    <li>✓ تكامل مع أنظمة ERP (SAP/Odoo)</li>
+                    <li>✓ مدير حساب مخصص للشركة</li>
                 </ul>
-                <button class="w-full py-3 rounded-xl border border-white/10 text-xs font-bold data-lang" data-ar="ابدأ الربط" data-en="Start Sync">ابدأ الربط</button>
+                <button onclick="selectPlan('حلول الشركات (100 موظف) - 6000 ريال')" class="w-full btn-cyan py-4">اختيار الباقة</button>
             </div>
-            <div class="glass p-8">
-                <h3 class="font-bold text-lg mb-4 data-lang" data-ar="حلول المؤسسات" data-en="Enterprise">حلول المؤسسات</h3>
-                <p class="text-xl font-bold mb-6 italic text-slate-400 data-lang" data-ar="مخصص" data-en="Custom">مخصص</p>
-                <ul class="text-[11px] text-slate-400 space-y-3 flex-grow mb-8 data-lang" 
-                    data-ar="<li>✓ سيرفر خاص</li><li>✓ دعم 24/7</li>" 
-                    data-en="<li>✓ Private Server</li><li>✓ 24/7 Support</li>">
-                    <li>✓ سيرفر خاص</li>
-                    <li>✓ دعم 24/7</li>
-                </ul>
-                <button class="w-full py-3 rounded-xl border border-white/10 text-xs font-bold data-lang" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</button>
+        </div>
+
+        <div class="executive-card p-12 border-2 border-gold/30 bg-gold/5 relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 text-[150px] opacity-5 rotate-12">🏆</div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+                <div>
+                    <h3 class="font-ruqaa text-4xl text-gold mb-3">العقد المتكامل (VIP Enterprise)</h3>
+                    <p class="text-slate-400 text-sm">للمنشآت الضخمة التي تتجاوز 100 موظف - دعم ميداني وتقني شامل</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-5xl font-black text-white mb-2">15,000 <span class="text-sm font-normal">ريال</span></p>
+                    <button onclick="selectPlan('عقد VIP السنوي - 15000 ريال')" class="btn-gold px-12 py-4 shadow-xl">طلب تعاقد رسمي</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="authSection" class="hidden fixed inset-0 z-[200] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-6">
+        <div class="executive-card w-full max-w-2xl p-12 relative border-white/10">
+            <button onclick="showSection('home')" class="absolute top-8 left-8 text-slate-600 hover:text-white transition">✕</button>
+            <h2 class="font-ruqaa text-4xl mb-2 text-center text-cyan-400">ملف المنشأة الجديد</h2>
+            <p class="text-center text-xs text-slate-500 mb-10">يرجى تزويدنا بالبيانات الأساسية لإنشاء هويتكم الرقمية على لومينا</p>
+            
+            <div class="grid md:grid-cols-2 gap-5">
+                <div><label class="text-[10px] text-slate-500 mb-2 block px-2">اسم المسؤول</label><input type="text" id="regUser" placeholder="محمد أحمد" class="input-premium"></div>
+                <div><label class="text-[10px] text-slate-500 mb-2 block px-2">اسم الشركة / المؤسسة</label><input type="text" id="regOrg" placeholder="شركة الحلول المتكاملة" class="input-premium"></div>
+                <div><label class="text-[10px] text-slate-500 mb-2 block px-2">البريد الإلكتروني الرسمي</label><input type="email" id="regEmail" placeholder="cfo@company.com" class="input-premium"></div>
+                <div><label class="text-[10px] text-slate-500 mb-2 block px-2">رقم جوال المسؤول</label><input type="tel" id="regPhone" placeholder="05xxxxxxxx" class="input-premium"></div>
+                <div class="md:col-span-2"><label class="text-[10px] text-slate-500 mb-2 block px-2">كلمة المرور</label><input type="password" placeholder="••••••••" class="input-premium"></div>
+            </div>
+            
+            <button onclick="finalizeAccount()" class="w-full btn-cyan py-5 mt-8 text-lg shadow-2xl">تفعيل الملف والاشتراك</button>
+        </div>
+    </section>
+
+    <section id="profileSection" class="hidden pt-36 px-6 pb-20 max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="font-ruqaa text-5xl mb-2">مركز التحكم</h2>
+                <p class="text-xs text-slate-500 italic" id="dashOrgName"></p>
+            </div>
+            <button onclick="location.reload()" class="text-red-500 text-[10px] font-black tracking-widest uppercase border border-red-500/20 px-4 py-2 rounded-lg hover:bg-red-500/10 transition">Log Out</button>
+        </div>
+        
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="executive-card p-8">
+                <h4 class="font-bold text-sm mb-8 border-b border-white/5 pb-4">حالة النظام والاشتراك</h4>
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-[10px] text-slate-500 uppercase mb-1">الباقة النشطة</p>
+                        <p class="text-xl font-black text-cyan-400" id="activePlanText">لا يوجد</p>
+                    </div>
+                    <div class="p-5 bg-white/5 rounded-2xl border border-white/5">
+                        <p class="text-[10px] font-bold text-slate-400 mb-2 uppercase">الربط مع ZATCA</p>
+                        <span class="bg-emerald-500/20 text-emerald-500 text-[9px] px-3 py-1 rounded-full font-black">جاهز للربط / Ready</span>
+                    </div>
+                    <button class="w-full btn-cyan py-3 text-xs">إدارة الموظفين (Users)</button>
+                </div>
+            </div>
+            <div class="lg:col-span-2 executive-card p-8 flex items-center justify-center text-slate-600 italic">
+                لوحة التقارير التحليلية ستظهر هنا فور تفعيل الربط البرمجي...
             </div>
         </div>
     </section>
 
     <script>
-        let currentLang = 'ar';
-
-        function toggleLang() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            
-            // تغيير اتجاه الصفحة
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.documentElement.lang = currentLang;
-            
-            // تحديث نص الزر
-            document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'EN' : 'AR';
-
-            // تحديث كل النصوص التي تحمل الكلاس data-lang
-            const elements = document.querySelectorAll('.data-lang');
-            elements.forEach(el => {
-                const text = el.getAttribute(`data-${currentLang}`);
-                if (el.tagName === 'INPUT') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-
-            // تغيير الخط بناءً على اللغة
-            document.body.style.fontFamily = currentLang === 'ar' ? "'Cairo', sans-serif" : "sans-serif";
-        }
+        let isAuth = false;
+        let pendingPlan = '';
 
         function showSection(id) {
-            ['homeSection', 'servicesSection', 'authSection', 'profileSection'].forEach(s => {
-                const el = document.getElementById(s);
-                if(el) el.classList.add('hidden');
-            });
+            ['homeSection', 'servicesSection', 'authSection', 'profileSection'].forEach(s => document.getElementById(s).classList.add('hidden'));
             document.getElementById(id + 'Section').classList.remove('hidden');
             window.scrollTo(0,0);
         }
 
-        // Particle Background Logic
-        const canvas = document.getElementById('canvas');
+        function selectPlan(plan) {
+            if(!isAuth) {
+                pendingPlan = plan;
+                alert(lang === 'ar' ? 'أهلاً بك. لإتمام التعاقد، يرجى ملء بيانات المنشأة أولاً.' : 'Welcome. To proceed, please fill in your organization details first.');
+                showSection('auth');
+            } else {
+                alert(`تم اختيار ${plan}. جاري تحويلك لبوابة الدفع الآمنة...`);
+            }
+        }
+
+        function finalizeAccount() {
+            const user = document.getElementById('regUser').value;
+            const org = document.getElementById('regOrg').value;
+            if(!user || !org) return alert("يرجى ملء البيانات الأساسية");
+
+            isAuth = true;
+            document.getElementById('navLoginBtn').classList.add('hidden');
+            document.getElementById('navUser').classList.remove('hidden');
+            document.getElementById('userNameNav').innerText = user;
+            document.getElementById('dashOrgName').innerText = org;
+            document.getElementById('activePlanText').innerText = pendingPlan || "بانتظار الاختيار";
+
+            showSection('profile');
+        }
+
+        let lang = 'ar';
+        function toggleLang() {
+            lang = lang === 'ar' ? 'en' : 'ar';
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langBtn').innerText = lang === 'ar' ? 'EN' : 'AR';
+            document.querySelectorAll('.data-lang').forEach(el => el.innerHTML = el.getAttribute(`data-${lang}`));
+        }
+
+        // Particle Background 4D
+        const canvas = document.getElementById('hero-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
-        for(let i=0; i<80; i++) particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:Math.random()-0.5, vy:Math.random()-0.5});
-        function draw() {
+        for(let i=0; i<100; i++) particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:Math.random()-0.3, vy:Math.random()-0.3});
+        function animate() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = '#00d2ff';
+            ctx.fillStyle = '#00e5ff';
             particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy;
                 if(p.x<0 || p.x>canvas.width) p.vx*=-1;
                 if(p.y<0 || p.y>canvas.height) p.vy*=-1;
-                ctx.beginPath(); ctx.arc(p.x, p.y, 1, 0, Math.PI*2); ctx.fill();
+                ctx.beginPath(); ctx.arc(p.x, p.y, 0.8, 0, Math.PI*2); ctx.fill();
             });
-            requestAnimationFrame(draw);
+            requestAnimationFrame(animate);
         }
-        draw();
+        animate();
     </script>
 </body>
 </html>
