@@ -3,125 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Portal | Marketplace</title>
+    <title>منصة أتمتة المؤسسات | المستقبل الرقمي</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <style>
-        body { background: #0f172a; color: white; font-family: 'Segoe UI', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .gradient-text { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .input-focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+        body { background-color: #030712; color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        .gradient-text { background: linear-gradient(135deg, #fff 30%, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-gradient { background: radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, rgba(3, 7, 18, 0) 70%); }
+        .service-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .service-card:hover { transform: translateY(-10px) scale(1.02); background: rgba(255, 255, 255, 0.06); border-color: rgba(59, 130, 246, 0.3); }
     </style>
 </head>
-<body class="p-6">
-    <div id="loginPage" class="max-w-md mx-auto mt-16 p-8 glass rounded-3xl shadow-2xl border border-white/10">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-black mb-2 gradient-text">دخول المنصة</h1>
-            <p class="text-slate-400 text-sm">أدخل بياناتك للوصول إلى لوحة التحكم</p>
+<body>
+
+    <div class="fixed inset-0 hero-gradient pointer-events-none"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black gradient-text">PLATFORM.IO</div>
+            <div class="flex items-center gap-4">
+                <a href="#services" class="text-sm text-slate-300 hover:text-white transition">الخدمات</a>
+                <a href="#pricing" class="text-sm text-slate-300 hover:text-white transition">الأسعار</a>
+                <button onclick="scrollToContact()" class="bg-blue-600/10 text-blue-400 border border-blue-500/20 px-4 py-2 rounded-full text-sm font-bold hover:bg-blue-600 hover:text-white transition">طلب عرض</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex items-center justify-center text-center pt-24 px-6 relative">
+        <div class="max-w-4xl" id="hero-content">
+            <div class="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-blue-400 text-sm mb-6 border border-blue-500/20">
+                <span>🚀</span> جيل جديد من إدارة المؤسسات
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8 gradient-text animate-pulse">
+                أتمتة ذكية.<br> نمو بلا حدود.
+            </h1>
+            <p class="text-xl text-slate-400 mb-12 leading-relaxed max-w-2xl mx-auto">
+                ودّع الفوضى الإدارية والمالية. منصتنا توفر للمؤسسات الطموحة نظاماً متكاملاً للأتمتة، التوثيق، والنمو السريع بلمسة زر.
+            </p>
+            <div class="flex gap-6 justify-center">
+                <button onclick="scrollToContact()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-blue-500/20 transition-all hover:scale-105">ابدأ رحلة النمو</button>
+                <a href="#services" class="glass text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/5 transition flex items-center gap-2">استكشف الخدمات ↓</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="py-24 px-6 glass my-16 border-y border-white/5">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="load-hidden" id="mission-text">
+                <h2 class="text-4xl font-black mb-6 gradient-text">رؤيتنا: احترافية مطلقة لمؤسستك</h2>
+                <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                    في عالم الأعمال المتسارع، العشوائية هي العدو الأول للنمو. رسالتنا هي تمكين المؤسسات والشركات عبر تزويدهم بأدوات رقمية متطورة تضمن الأتمتة الكاملة للعمليات المعقدة.
+                </p>
+                <p class="text-lg text-slate-400 leading-relaxed">
+                    نحن لا نقدم مجرد برمجيات، بل نقدم شريكاً إستراتيجياً يحول التحديات الإدارية والمالية إلى ميزات تنافسية مستدامة، مما يسمح لك بالتركيز على توسيع نطاق أعمالك والاستحواذ على السوق.
+                </p>
+            </div>
+            <div class="glass p-8 rounded-3xl border-blue-500/20 shadow-2xl load-hidden" id="mission-img">
+                <div class="text-9xl text-center">📊</div>
+                <p class="text-center mt-6 text-slate-500">نحو تحول رقمي حقيقي</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-20 load-hidden" id="services-header">
+            <h2 class="text-5xl font-black mb-4 gradient-text">منظومة خدمات متكاملة</h2>
+            <p class="text-xl text-slate-400">حلول رقمية صُممت خصيصاً لمواجهة تحديات المؤسسات الحديثة</p>
         </div>
 
-        <div id="initialStep">
-            <label class="block text-sm mb-2 text-slate-300">اسم المستخدم</label>
-            <input type="text" id="username" placeholder="مثال: omar2246" class="w-full p-4 mb-4 rounded-xl bg-slate-800/50 border border-slate-700 focus:input-focus transition-all">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-3xl service-card load-hidden">
+                <div class="text-4xl mb-6">💰</div>
+                <h3 class="text-2xl font-bold mb-3">الأتمتة المالية</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">خصم عمولة تلقائي (10%)، حساب صافي الأرباح للموردين، وتقارير مالية دقيقة بنقرة زر.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card load-hidden">
+                <div class="text-4xl mb-6">🛡️</div>
+                <h3 class="text-2xl font-bold mb-3">التوثيق والامتثال</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">بوابة آمنة لرفع والتحقق من السجلات التجارية وشهادات العمل الحر لضمان الموثوقية.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card load-hidden">
+                <div class="text-4xl mb-6">📝</div>
+                <h3 class="text-2xl font-bold mb-3">إدارة العقود الذكية</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">إنشاء، توقيع، ومتابعة العقود رقمياً مع الموردين والمستقلين بشكل قانوني ومرن.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card load-hidden">
+                <div class="text-4xl mb-6">📈</div>
+                <h3 class="text-2xl font-bold mb-3">تقارير الأداء الذكية</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">تحليلات متقدمة لنمو الأعمال، قياس كفاءة العمليات، وتصدير كشوفات جاهزة للمحاسبة.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card load-hidden">
+                <div class="text-4xl mb-6">🎥</div>
+                <h3 class="text-2xl font-bold mb-3">بوابة عرض الميديا</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">مشغل وسائط سريع لعرض فيديوهات الخدمات (Short-form) لجذب العملاء بشكل عصري.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl service-card load-hidden">
+                <div class="text-4xl mb-6">🤝</div>
+                <h3 class="text-2xl font-bold mb-3">دعم فني مخصص</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">فريق دعم فني وتقني جاهز على مدار الساعة لضمان استمرارية عمل منصتك دون انقطاع.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 px-6 glass my-16 border-y border-white/5 text-center">
+        <div class="max-w-3xl mx-auto load-hidden">
+            <h2 class="text-5xl font-black mb-6 gradient-text">استثمر في مستقبل مؤسستك</h2>
+            <p class="text-xl text-slate-300 mb-12">احصل على الأتمتة الكاملة، الأمان المطلق، والنمو المتسارع مقابل تكلفة شهرية ثابتة وشفافة.</p>
             
-            <label class="block text-sm mb-2 text-slate-300">رقم الهاتف المرتبط بالحساب</label>
-            <div class="flex gap-2 mb-6">
-                <input type="text" value="+966" class="w-20 p-4 rounded-xl bg-slate-900 border border-slate-700 text-center text-slate-400" disabled>
-                <input type="tel" id="phone" placeholder="5xxxxxxxx" class="flex-1 p-4 rounded-xl bg-slate-800/50 border border-slate-700 focus:input-focus transition-all">
+            <div class="glass p-12 rounded-3xl border-2 border-blue-500/30 inline-block relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/10 blur-3xl"></div>
+                <p class="text-sm uppercase text-slate-400 mb-2">الاشتراك الشهري الاحترافي</p>
+                <p class="text-7xl font-black text-white mb-4">1600 <span class="text-2xl text-slate-500">ر.س / شهرياً</span></p>
+                <p class="text-blue-400 text-sm mb-10">شامل كافة الخدمات + التحديثات المستقبلية</p>
+                <button onclick="scrollToContact()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-xl shadow-blue-500/20">طلب الانضمام للمنصة</button>
             </div>
-
-            <button onclick="requestOTP()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] active:scale-95 p-4 rounded-2xl font-bold shadow-lg shadow-blue-500/20 transition-all">
-                إرسال رمز التحقق (OTP)
-            </button>
         </div>
+    </section>
 
-        <div id="otpSection" class="hidden mt-8 text-center animate-pulse">
-            <div class="bg-blue-500/10 p-3 rounded-xl mb-6 text-blue-400 text-xs">
-                تم إرسال رمز التحقق إلى الرقم المنتهي بـ <span id="phoneLastDigits">**</span>
-            </div>
-            <p class="mb-4 text-sm text-slate-300">أدخل الرمز المكون من 4 أرقام</p>
-            <div class="flex justify-center gap-3">
-                <input type="text" maxlength="1" class="otp-input w-12 h-14 text-center bg-slate-900 border border-slate-700 rounded-xl text-2xl font-bold focus:border-blue-500">
-                <input type="text" maxlength="1" class="otp-input w-12 h-14 text-center bg-slate-900 border border-slate-700 rounded-xl text-2xl font-bold focus:border-blue-500">
-                <input type="text" maxlength="1" class="otp-input w-12 h-14 text-center bg-slate-900 border border-slate-700 rounded-xl text-2xl font-bold focus:border-blue-500">
-                <input type="text" maxlength="1" class="otp-input w-12 h-14 text-center bg-slate-900 border border-slate-700 rounded-xl text-2xl font-bold focus:border-blue-500">
-            </div>
-            <button onclick="verifyAndLogin()" class="mt-8 w-full bg-green-600 hover:bg-green-700 p-4 rounded-2xl font-bold transition-all shadow-lg shadow-green-500/20">
-                تأكيد الدخول
-            </button>
-        </div>
-    </div>
-
-    <div id="dashboard" class="hidden max-w-5xl mx-auto animate-in fade-in duration-700">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+    <section id="contact" class="py-24 px-6 max-w-xl mx-auto text-center load-hidden">
+        <h2 class="text-4xl font-black mb-6 gradient-text">هل أنت جاهز للاستحواذ على السوق؟</h2>
+        <p class="text-lg text-slate-400 mb-12">أدخل بيانات مؤسستك، وسيتصل بك فريقنا لتقديم عرض توضيحي حي (Demo) وتفعيل حسابك.</p>
+        
+        <form class="glass p-8 rounded-3xl space-y-6 text-right border-white/10 shadow-2xl">
             <div>
-                <h2 class="text-3xl font-bold">لوحة إدارة المؤسسة</h2>
-                <p class="text-slate-400">نظام الأتمتة المالية المتكامل</p>
+                <label class="block text-sm mb-2 text-slate-300">اسم المؤسسة/الشركة</label>
+                <input type="text" placeholder="مثال: شركة نمو الأعمال" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 focus:border-blue-500 outline-none transition">
             </div>
-            <div class="flex gap-4">
-                <div class="glass px-6 py-2 rounded-2xl border-green-500/30">
-                    <p class="text-[10px] text-slate-400 uppercase">الاشتراك الشهري</p>
-                    <p class="text-xl font-bold text-green-400">1600 ر.س</p>
-                </div>
-                <div class="glass px-6 py-2 rounded-2xl border-blue-500/30 text-center">
-                    <p class="text-[10px] text-slate-400 uppercase">العمولة</p>
-                    <p class="text-xl font-bold text-blue-400">10%</p>
-                </div>
+            <div>
+                <label class="block text-sm mb-2 text-slate-300">رقم التواصل (واتساب)</label>
+                <input type="tel" placeholder="05xxxxxxxx" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 focus:border-blue-500 outline-none transition">
             </div>
-        </header>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl font-bold transition">إرسال طلب الاستشارة المجانية</button>
+        </form>
+    </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="glass p-8 rounded-3xl relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl group-hover:bg-blue-500/10 transition-all"></div>
-                <h3 class="text-xl font-bold mb-6 flex items-center gap-2">💰 المحاسب الآلي الذكي</h3>
-                <input type="number" id="amt" placeholder="أدخل مبلغ العملية الإجمالي" class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 mb-6 text-xl">
-                <div class="space-y-4">
-                    <div class="flex justify-between p-4 bg-white/5 rounded-xl">
-                        <span class="text-slate-400">رسوم المنصة (10%):</span>
-                        <span id="fee" class="text-red-400 font-bold font-mono">0.00 ر.س</span>
-                    </div>
-                    <div class="flex justify-between p-4 bg-green-500/10 rounded-xl border border-green-500/20">
-                        <span class="font-bold">المبلغ الصافي للمورد:</span>
-                        <span id="net" class="text-green-400 font-black text-xl font-mono">0.00 ر.س</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass p-8 rounded-3xl">
-                <h3 class="text-xl font-bold mb-6">🛡️ بوابة التوثيق والامتثال</h3>
-                <p class="text-sm text-slate-400 mb-6 font-light leading-relaxed">ارفع السجل التجاري، شهادة العمل الحر، أو فيديوهات الخدمة (Max 10s) ليتم فحصها آلياً.</p>
-                <div class="border-2 border-dashed border-slate-700 rounded-2xl p-8 text-center hover:border-blue-500 transition-all cursor-pointer">
-                    <input type="file" id="fileInput" class="hidden">
-                    <label for="fileInput" class="cursor-pointer">
-                        <span class="text-blue-400 font-bold block mb-2">اضغط هنا لرفع الملفات</span>
-                        <span class="text-xs text-slate-500">JPG, PNG, MP4 (Max 10s)</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
+    <footer class="py-10 px-6 border-t border-white/5 text-center text-slate-600 text-sm">
+        <p>&copy; 2024 PLATFORM.IO. جميع الحقوق محفوظة.</p>
+        <p class="mt-2">نحو مستقبل رقمي آمن ومؤتمت.</p>
+    </footer>
 
     <script>
-        function requestOTP() {
-            const phone = document.getElementById('phone').value;
-            if(phone.length < 9) { alert('يرجى إدخال رقم هاتف صحيح'); return; }
-            
-            document.getElementById('initialStep').classList.add('hidden');
-            document.getElementById('otpSection').classList.remove('hidden');
-            document.getElementById('phoneLastDigits').innerText = phone.slice(-2);
-        }
-
-        function verifyAndLogin() {
-            // محاكاة لعملية التحقق
-            document.getElementById('loginPage').classList.add('hidden');
-            document.getElementById('dashboard').classList.remove('hidden');
-        }
-
-        document.getElementById('amt').addEventListener('input', function(e){
-            let val = parseFloat(e.target.value) || 0;
-            document.getElementById('fee').innerText = (val * 0.1).toFixed(2) + " ر.س";
-            document.getElementById('net').innerText = (val * 0.9).toFixed(2) + " ر.س";
+        // إعدادات التأثيرات الحركية عند التمرير
+        ScrollReveal().reveal('.load-hidden', {
+            delay: 200,
+            duration: 1000,
+            distance: '50px',
+            origin: 'bottom',
+            opacity: 0,
+            scale: 0.9,
+            easing: 'cubic-bezier(0.5, 0, 0, 1)'
         });
+
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
+
 
