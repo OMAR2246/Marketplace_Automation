@@ -2,114 +2,114 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina Finance | Auto-Renewal System</title>
+    <title>Lumina Admin | إدارة العمليات المالية والامتثال</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@700&display=swap');
-        body { background: #010409; color: #e6edf3; font-family: 'Cairo', sans-serif; transition: 0.3s; }
-        .glass { background: rgba(13, 17, 23, 0.8); backdrop-filter: blur(12px); border: 1px solid #30363d; }
-        .finance-gradient { background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); }
-        .logo-font { font-family: 'Orbitron', sans-serif; letter-spacing: 2px; }
-        .hidden { display: none !important; }
-        
-        /* تصميم زر التبديل (Toggle Switch) */
-        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #21262d; transition: .4s; border-radius: 34px; border: 1px solid #30363d; }
-        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: #00d2ff; border-color: #00d2ff; box-shadow: 0 0 10px rgba(0, 210, 255, 0.4); }
-        input:checked + .slider:before { transform: translateX(24px); }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+        body { background: #010409; color: #e6edf3; font-family: 'Cairo', sans-serif; }
+        .admin-card { background: #0d1117; border: 1px solid #30363d; border-radius: 20px; transition: 0.3s; }
+        .admin-card:hover { border-color: #00f2fe; }
+        .status-badge { padding: 2px 10px; border-radius: 50px; font-size: 10px; font-weight: bold; }
+        .danger-zone { border: 1px solid #da3633; background: #211110; }
+        .btn-approve { background: #059669; transition: 0.3s; }
+        .btn-approve:hover { background: #10b981; transform: scale(1.05); }
     </style>
 </head>
-<body>
+<body class="p-8">
 
-    <nav class="fixed top-0 w-full z-50 glass p-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 finance-gradient rounded-lg flex items-center justify-center font-black text-white">L</div>
-                <span class="text-xl font-black logo-font">LUMINA</span>
+    <div class="max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-10">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20">L</div>
+                <h1 class="text-2xl font-black italic">LUMINA <span class="text-cyan-400">ADMIN</span></h1>
             </div>
-            <div class="flex gap-4">
-                <button onclick="showSection('subscription')" class="text-[10px] bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-4 py-1 rounded-md font-bold">إدارة الاشتراك</button>
-                <button onclick="showSection('wallet')" class="text-[10px] bg-slate-800 px-3 py-1 rounded-md">المحفظة 💳</button>
+            <div class="flex gap-6">
+                <div class="admin-card px-6 py-3">
+                    <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">المحفظة المركزية</p>
+                    <p class="text-2xl font-black text-emerald-400">1,250,000 <span class="text-xs text-white">SAR</span></p>
+                </div>
+                <div class="admin-card px-6 py-3">
+                    <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">طلبات سحب معلقة</p>
+                    <p class="text-2xl font-black text-yellow-500">3</p>
+                </div>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <main id="subscriptionSection" class="hidden pt-32 px-6 max-w-2xl mx-auto">
-        <div class="glass p-8 rounded-[2.5rem] border-white/5 relative overflow-hidden">
-            <div class="flex justify-between items-start mb-8">
+        <section class="admin-card p-8 mb-10 border-yellow-500/20 shadow-xl shadow-yellow-500/5">
+            <div class="flex justify-between items-center mb-8">
                 <div>
-                    <h2 class="text-2xl font-black mb-1">تفاصيل الاشتراك</h2>
-                    <p class="text-xs text-slate-500 italic">الباقة الحالية: <span class="text-cyan-400">المتقدمة (30 موظف)</span></p>
-                </div>
-                <div class="text-left">
-                    <p class="text-[10px] text-slate-500 uppercase">تاريخ الانتهاء</p>
-                    <p class="font-mono text-sm">2026-05-13</p>
+                    <h3 class="text-xl font-black flex items-center gap-2">
+                        <span class="w-2 h-2 bg-yellow-500 rounded-full animate-ping"></span>
+                        طلبات السحب من المحفظة
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-1">تتطلب هذه الطلبات مراجعة الحساب قبل التحويل البنكي</p>
                 </div>
             </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-right text-sm">
+                    <thead>
+                        <tr class="text-slate-500 border-b border-slate-800">
+                            <th class="pb-4">معلومات المشترك</th>
+                            <th class="pb-4">المبلغ المطلوب</th>
+                            <th class="pb-4">الأيبان البنكي (IBAN)</th>
+                            <th class="pb-4">حالة الامتثال</th>
+                            <th class="pb-4">الإجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-6">
+                                <p class="font-bold">مؤسسة التقنية المتقدمة</p>
+                                <p class="text-[10px] text-slate-500 italic">ID: #88219</p>
+                            </td>
+                            <td class="py-6 font-black text-white">15,000.00 <span class="text-[10px] text-slate-500">SAR</span></td>
+                            <td class="py-6 font-mono text-[10px] text-cyan-400">SA8240000000112233445566</td>
+                            <td class="py-6"><span class="status-badge bg-emerald-500/10 text-emerald-500">✓ ممتثل</span></td>
+                            <td class="py-6">
+                                <div class="flex gap-2">
+                                    <button onclick="approveAction('15,000')" class="btn-approve px-4 py-2 rounded-lg text-xs font-bold text-white shadow-lg">موافقة وسحب</button>
+                                    <button class="bg-red-500/10 text-red-500 border border-red-500/20 px-4 py-2 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition">رفض</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-6 font-bold">متجر التوريدات الشامل</td>
+                            <td class="py-6 font-black text-white">4,200.00 <span class="text-[10px] text-slate-500">SAR</span></td>
+                            <td class="py-6 font-mono text-[10px] text-cyan-400">SA1020000000998877665544</td>
+                            <td class="py-6"><span class="status-badge bg-red-500/10 text-red-500">⚠️ اشتباه تلاعب</span></td>
+                            <td class="py-6 text-slate-500 text-xs italic">محظور مؤقتاً</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-            <div class="bg-white/5 p-6 rounded-3xl border border-white/5 flex justify-between items-center group">
-                <div>
-                    <h3 class="font-bold text-sm mb-1 group-hover:text-cyan-400 transition">التجديد التلقائي</h3>
-                    <p class="text-[10px] text-slate-500 leading-relaxed">عند التفعيل، سيتم تجديد اشتراكك تلقائياً وخصم القيمة من محفظتك لضمان استمرار الخدمة.</p>
+        <section class="admin-card p-8">
+            <h3 class="text-xl font-black mb-8">قاعدة بيانات المشتركين</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-900/40 p-6 rounded-2xl border border-white/5 flex justify-between items-center">
+                    <div>
+                        <p class="font-bold">شركة المسار السريع</p>
+                        <p class="text-[10px] text-slate-500">باقة: سنوية احترافية</p>
+                    </div>
+                    <button class="text-cyan-400 text-xs font-bold underline">عرض الملف</button>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="autoRenewToggle" onchange="handleRenewalChange()">
-                    <span class="slider"></span>
-                </label>
+                <div class="danger-zone p-6 rounded-2xl flex justify-between items-center">
+                    <div>
+                        <p class="font-bold text-red-400">يوزر مشبوه (محاولات اختراق)</p>
+                        <p class="text-[10px] text-red-300">IP: 192.168.1.1</p>
+                    </div>
+                    <button class="bg-red-600 text-white px-4 py-1 rounded text-[10px] font-bold">حظر نهائي</button>
+                </div>
             </div>
-
-            <div id="renewalStatus" class="mt-4 text-center hidden">
-                <p class="text-[10px] text-emerald-500 font-bold">✓ تم تفعيل التجديد التلقائي بنجاح</p>
-            </div>
-
-            <button onclick="showSection('marketing')" class="mt-10 text-slate-500 text-xs block mx-auto underline">العودة للرئيسية</button>
-        </div>
-    </main>
-
-    <main id="walletSection" class="hidden pt-32 px-6 max-w-2xl mx-auto">
-        <div class="wallet-card p-10 rounded-[3rem] text-center">
-            <h2 class="text-2xl font-black mb-6">محفظة Lumina</h2>
-            <p class="text-xs text-slate-500 mb-2">الرصيد المتاح</p>
-            <p class="text-5xl font-black mb-10">0.00 <span class="text-lg">SAR</span></p>
-            <input type="text" placeholder="أدخل الـ IBAN الخاص بك" class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl text-center font-mono text-sm outline-none focus:border-cyan-500 mb-4">
-            <button class="w-full finance-gradient py-4 rounded-2xl font-black">شحن المحفظة</button>
-        </div>
-    </main>
-
-    <main id="marketingPage" class="pt-40 px-6 text-center">
-        <h1 class="text-6xl md:text-8xl font-black mb-8 logo-font tracking-tighter italic">LUMINA</h1>
-        <p class="text-slate-500 max-w-lg mx-auto mb-12">المنصة المالية الأكثر أماناً لإدارة فواتيرك وأتمتة عملياتك المحاسبية.</p>
-        <div class="flex flex-col gap-4 max-w-xs mx-auto">
-            <button onclick="showSection('subscription')" class="finance-gradient p-5 rounded-2xl font-black text-lg">لوحة التحكم</button>
-            <p class="text-[10px] text-slate-600">موثق من قبل هيئة الزكاة والضريبة والجمارك</p>
-        </div>
-    </main>
+        </section>
+    </div>
 
     <script>
-        function showSection(id) {
-            document.getElementById('marketingPage').classList.add('hidden');
-            document.getElementById('walletSection').classList.add('hidden');
-            document.getElementById('subscriptionSection').classList.add('hidden');
-            
-            document.getElementById(id + 'Section')?.classList.remove('hidden');
-            if(id === 'marketing') document.getElementById('marketingPage').classList.remove('hidden');
-            window.scrollTo(0,0);
-        }
-
-        function handleRenewalChange() {
-            const isChecked = document.getElementById('autoRenewToggle').checked;
-            const status = document.getElementById('renewalStatus');
-            
-            if(isChecked) {
-                status.classList.remove('hidden');
-                // هنا يمكن إضافة كود لإرسال تحديث لقاعدة البيانات
-                console.log("Auto-renewal activated");
-            } else {
-                status.classList.add('hidden');
-                console.log("Auto-renewal deactivated");
+        function approveAction(amount) {
+            if(confirm(`هل أنت متأكد من الموافقة على سحب مبلغ ${amount} SAR وتحويله للأيبان المذكور؟`)) {
+                alert("تم إرسال أمر السحب للبنك بنجاح. سيصل المبلغ للعميل خلال 24 ساعة.");
             }
         }
     </script>
